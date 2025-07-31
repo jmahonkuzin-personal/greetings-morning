@@ -1,4 +1,4 @@
-package com.example.hopouttabed.home
+package com.example.hopouttabed.dashboard.viewModel
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Campaign
@@ -12,7 +12,8 @@ data class AlarmUiModel(
     val time: String,
     val amPm: String,
     val missionIcons: List<String>,
-    val enabled: Boolean
+    val enabled: Boolean,
+    val activeDays: Set<String> = setOf("Mon", "Wed", "Fri")
 )
 
 @Composable
