@@ -18,7 +18,8 @@ import com.example.hopouttabed.dashboard.viewModel.missionToIcon
 fun MissionDisplay(alarm: AlarmUiModel, modifier: Modifier) {
 
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         alarm.missionIcons.forEach {
             Box(

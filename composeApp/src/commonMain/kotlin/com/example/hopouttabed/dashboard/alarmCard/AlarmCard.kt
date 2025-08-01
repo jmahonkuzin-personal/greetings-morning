@@ -1,6 +1,5 @@
 package com.example.hopouttabed.dashboard.alarmCard
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -10,69 +9,89 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.hopouttabed.dashboard.viewModel.AlarmDayOfWeek
 import com.example.hopouttabed.dashboard.viewModel.AlarmUiModel
+import kotlinx.datetime.DayOfWeek
 
 @Composable
 fun AlarmCard(
     alarm: AlarmUiModel,
     onToggleEnabled: (Boolean) -> Unit
 ) {
+
     val backgroundColor = if (alarm.enabled) {
-        MaterialTheme.colorScheme.surface
+        MaterialTheme.colorScheme.secondary // Gunmetal
     } else {
-        MaterialTheme.colorScheme.surface.copy(alpha = 0.4f) // dimmed background for disabled
+        MaterialTheme.colorScheme.secondary.copy(alpha = 0.6f)
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(color = backgroundColor, shape = MaterialTheme.shapes.medium)
-            .padding(horizontal = 16.dp),
-        contentAlignment = Alignment.Center
+    val timeColor = if (alarm.enabled)
+        MaterialTheme.colorScheme.onSecondary
+    else
+        MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.5f)
+
+    Card(
+        modifier = Modifier.fillMaxWidth().height(100.dp), // <-- Consistent fixed height,
+        shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(containerColor = backgroundColor),
+        elevation = CardDefaults.cardElevation(20.dp)
     ) {
-        MissionDisplay(
-            alarm = alarm,
-            modifier = Modifier.align(Alignment.CenterStart)
-        )
-        Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp, vertical = 2.dp), // 👈 inner padding for all child content
+            contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = "${alarm.time} ${alarm.amPm}",
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.headlineLarge
+            MissionDisplay(
+                alarm = alarm,
+                modifier = Modifier.align(Alignment.CenterStart)
             )
-
-            Spacer(modifier = Modifier.height(12.dp))
-
-            // Active Days Row
-            val allDays = listOf("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
+            Column(
+                modifier = Modifier.padding(top = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                allDays.forEach { day ->
-                    val isActive = day in alarm.activeDays
-                    Text(
-                        text = day,
-                        color = if (isActive) Color.Black else Color.Gray,
-                        fontWeight = if (isActive) FontWeight.SemiBold else FontWeight.Normal,
-                        fontSize = 12.sp
-                    )
+                Text(
+                    text = "${alarm.time} ${alarm.amPm}",
+                    style = MaterialTheme.typography.headlineLarge.copy(
+                        fontWeight = FontWeight.ExtraBold,
+                        letterSpacing = 1.5.sp
+                    ),
+                    color = timeColor
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // Active Days Row
+                val allDays = AlarmDayOfWeek.entries
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
+                ) {
+                    allDays.forEach { day ->
+                        val isActive = day in alarm.activeDays
+                        Text(
+                            text = day.displayName,
+                            color = if (isActive) MaterialTheme.colorScheme.onSecondary else MaterialTheme.colorScheme.onSecondary.copy(
+                                alpha = 0.4f
+                            ),
+                            fontWeight = if (isActive) FontWeight.SemiBold else FontWeight.Normal,
+                            fontSize = 12.sp
+                        )
+                    }
                 }
             }
+            Switch(
+                checked = alarm.enabled,
+                onCheckedChange = { onToggleEnabled(it) },
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = Color.White,
+                    checkedTrackColor = MaterialTheme.colorScheme.primary,
+                    uncheckedThumbColor = Color.LightGray,
+                    uncheckedTrackColor = Color.Gray
+                ),
+                modifier = Modifier.align(Alignment.CenterEnd)
+            )
         }
-        Switch(
-            checked = alarm.enabled,
-            onCheckedChange = { onToggleEnabled(it) },
-            colors = SwitchDefaults.colors(
-                checkedThumbColor = Color.White,
-                checkedTrackColor = Color(0xFFFFB6B6),
-                uncheckedThumbColor = Color.LightGray,
-                uncheckedTrackColor = Color.Gray
-            ),
-            modifier = Modifier.align(Alignment.CenterEnd)
-        )
     }
 }

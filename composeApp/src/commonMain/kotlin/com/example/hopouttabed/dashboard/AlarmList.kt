@@ -16,7 +16,7 @@ import com.example.hopouttabed.dashboard.viewModel.AlarmUiModel
 @Composable
 fun AlarmList(alarms: List<AlarmUiModel>, onToggle: (index: Int, isEnabled: Boolean) -> Unit) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(18.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()

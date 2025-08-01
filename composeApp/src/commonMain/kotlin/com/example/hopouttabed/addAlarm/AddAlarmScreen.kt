@@ -6,12 +6,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
-import com.example.hopouttabed.addAlarm.basicAlarmSettings.SoundSetting
+import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
+import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundUiState
 import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsCallbacks
 import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsViewModel
@@ -36,8 +36,7 @@ fun AddAlarmScreen(
     Scaffold(
         topBar = {
             AddAlarmTopAppBar(onBack = { showConfirmDialog = true })
-        },
-        containerColor = Color.Black
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -61,13 +60,12 @@ fun AddAlarmScreen(
                 )
             )
 
-            SoundSetting(
-                label = "Sound",
-                alarmSoundUiState = alarmSoundUiState,
+            SelectedSoundSetting(
+                selectedSound = alarmSoundUiState.sound,
                 onNavigateToSoundPicker = onNavigateToSoundPicker
             )
 
-            MissionSection()
+            MissionSettingsSection()
 
             Spacer(modifier = Modifier.weight(1f))
 

@@ -14,7 +14,7 @@ fun DashboardTopAppBar() {
             Text(
                 "It’s Sunday, July 27th",
                 color = MaterialTheme.colorScheme.onPrimary,
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineSmall
             )
         },
         navigationIcon = {

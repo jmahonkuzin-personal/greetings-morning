@@ -27,20 +27,20 @@ class DashboardViewModel : ViewModel() {
         }
     }
 
-    fun updateActiveDay(index: Int, day: String, active: Boolean) {
-        _alarms.update { list ->
-            list.mapIndexed { i, alarm ->
-                if (i == index) {
-                    val updatedDays = if (active) {
-                        alarm.activeDays + day
-                    } else {
-                        alarm.activeDays - day
-                    }
-                    alarm.copy(activeDays = updatedDays)
-                } else alarm
-            }
-        }
-    }
+//    fun updateActiveDay(index: Int, day: String, active: Boolean) {
+//        _alarms.update { list ->
+//            list.mapIndexed { i, alarm ->
+//                if (i == index) {
+//                    val updatedDays = if (active) {
+//                        alarm.activeDays + day
+//                    } else {
+//                        alarm.activeDays - day
+//                    }
+//                    alarm.copy(activeDays = updatedDays)
+//                } else alarm
+//            }
+//        }
+//    }
 
     fun addAlarm(alarm: AlarmUiModel) {
         _alarms.update { it + alarm }

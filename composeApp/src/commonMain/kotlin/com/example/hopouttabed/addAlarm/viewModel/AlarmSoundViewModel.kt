@@ -6,8 +6,34 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+
+enum class AlarmSound(val displayName: String) {
+    BeepBeep("Beep Beep"),
+    Beacon("Beacon"),
+    Radar("Radar"),
+    BellRing("Bell Ring"),
+    SunriseChimes("Sunrise Chimes"),
+    Uplift("Uplift"),
+    DreamPop("Dream Pop"),
+    HappyVibes("Happy Vibes"),
+    Birdsong("Birdsong"),
+    OceanWaves("Ocean Waves"),
+    Rainfall("Rainfall"),
+    SirenSprint("Siren Sprint"),
+    SoftGong("Soft Gong"),
+    CosmicHum("Cosmic Hum"),
+    GameStart("Game Start");
+
+    override fun toString(): String = displayName
+
+    companion object {
+        fun fromDisplayName(name: String): AlarmSound? =
+            entries.firstOrNull { it.displayName == name }
+    }
+}
+
 data class AlarmSoundUiState(
-    val sound: String = ""
+    val sound: AlarmSound = AlarmSound.Beacon
 )
 
 class AlarmSoundViewModel : ViewModel() {
@@ -15,7 +41,7 @@ class AlarmSoundViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(AlarmSoundUiState())
     val uiState: StateFlow<AlarmSoundUiState> = _uiState.asStateFlow()
 
-    fun updateSound(sound: String) {
+    fun updateSound(sound: AlarmSound) {
         _uiState.update { current ->
             current.copy(
                 sound = sound

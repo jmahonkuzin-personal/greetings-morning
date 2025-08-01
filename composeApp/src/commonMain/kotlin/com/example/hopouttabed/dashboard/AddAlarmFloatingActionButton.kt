@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -24,17 +25,18 @@ fun AddAlarmFloatingActionButton(
         contentColor = MaterialTheme.colorScheme.onPrimary,
         shape = RoundedCornerShape(16.dp),
         elevation = FloatingActionButtonDefaults.elevation(
-            defaultElevation = 6.dp,
-            pressedElevation = 10.dp
+            defaultElevation = 8.dp,
+            pressedElevation = 12.dp
         ),
         modifier = Modifier
-            .height(48.dp)
+            .height(56.dp)
             .width(100.dp)
     ) {
         Icon(
             imageVector = Icons.Default.Add,
             contentDescription = "Add Alarm",
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(28.dp),
+            tint = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

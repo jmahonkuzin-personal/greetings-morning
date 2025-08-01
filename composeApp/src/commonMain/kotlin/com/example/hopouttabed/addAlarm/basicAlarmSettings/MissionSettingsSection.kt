@@ -1,26 +1,21 @@
-package com.example.hopouttabed.addAlarm
+package com.example.hopouttabed.addAlarm.basicAlarmSettings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Campaign
 import androidx.compose.material.icons.filled.GraphicEq
 import androidx.compose.material.icons.filled.WbSunny
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MissionSection() {
+fun MissionSettingsSection() {
     // 3 mission states, matching the 3 icons
     val missionStates = remember {
         mutableStateListOf(true, false, false)
@@ -32,29 +27,28 @@ fun MissionSection() {
         Icons.Default.GraphicEq  // Sound wave
     )
 
-//    Column(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(vertical = 8.dp)
-//            .background(Color.DarkGray, shape = RoundedCornerShape(12.dp))
-//            .padding(16.dp)
-//    ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
             .padding(vertical = 8.dp)
-            .background(Color.DarkGray, shape = RoundedCornerShape(12.dp))
+            .background(
+                color = MaterialTheme.colorScheme.secondary,
+                shape = MaterialTheme.shapes.medium
+            )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text("Mission", color = Color.White)
+        Text(
+            text = "Mission",
+            color = MaterialTheme.colorScheme.onSecondary,
+            style = MaterialTheme.typography.titleLarge
+        )
         Spacer(modifier = Modifier.weight(1f)) // 👈 Push content to the right
 
-
         Row(
-            horizontalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             icons.forEachIndexed { index, icon ->
@@ -63,15 +57,14 @@ fun MissionSection() {
                         checked = missionStates[index],
                         onCheckedChange = { missionStates[index] = it },
                         colors = CheckboxDefaults.colors(
-                            checkedColor = Color(0xFFFFB6B6),
-                            checkmarkColor = Color.Black,
-                            uncheckedColor = Color.LightGray
+                            checkedColor = MaterialTheme.colorScheme.primary,
+                            uncheckedColor = MaterialTheme.colorScheme.onSecondary
                         )
                     )
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
-                        tint = Color.White
+                        tint = MaterialTheme.colorScheme.onSecondary
                     )
                 }
             }

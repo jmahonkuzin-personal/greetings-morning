@@ -1,6 +1,5 @@
 package com.example.hopouttabed.addAlarm
 
-
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.*
@@ -15,7 +14,7 @@ fun AddAlarmTopAppBar(
         title = {
             Text(
                 "Add Alarm",
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineLarge
             )
         },
         navigationIcon = {

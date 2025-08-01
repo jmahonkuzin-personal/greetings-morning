@@ -13,8 +13,26 @@ data class AlarmUiModel(
     val amPm: String,
     val missionIcons: List<String>,
     val enabled: Boolean,
-    val activeDays: Set<String> = setOf("Mon", "Wed", "Fri")
+    val activeDays: Set<AlarmDayOfWeek> = setOf(AlarmDayOfWeek.Monday, AlarmDayOfWeek.Tuesday, AlarmDayOfWeek.Wednesday)
 )
+
+
+enum class AlarmDayOfWeek(val displayName: String) {
+    Sunday("S"),
+    Monday("M"),
+    Tuesday("T"),
+    Wednesday("W"),
+    Thursday("T"),
+    Friday("F"),
+    Saturday("S");
+
+    override fun toString(): String = displayName
+
+    companion object {
+        fun fromDisplayName(name: String): AlarmDayOfWeek? =
+            entries.firstOrNull { it.displayName == name }
+    }
+}
 
 @Composable
 fun missionToIcon(mission: String): ImageVector {

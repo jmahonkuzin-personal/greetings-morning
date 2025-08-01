@@ -26,9 +26,11 @@ fun rememberWakeUpAppTypography(): Typography {
 
     return Typography(
         displayLarge = TextStyle(fontSize = 34.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
+        displayMedium = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
         headlineLarge = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
         headlineMedium = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium, fontFamily = robotoMono),
-        titleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Medium, fontFamily = robotoMono),
+        headlineSmall = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Medium, fontFamily = robotoMono),
+        titleLarge = TextStyle(fontSize = 18.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
         bodyLarge = TextStyle(fontSize = 16.sp, fontFamily = robotoMono),
         bodyMedium = TextStyle(fontSize = 14.sp, fontFamily = robotoMono),
         labelLarge = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.SemiBold, fontFamily = robotoMono)

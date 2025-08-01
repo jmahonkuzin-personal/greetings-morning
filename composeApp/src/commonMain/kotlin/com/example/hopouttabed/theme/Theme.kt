@@ -16,6 +16,19 @@ fun WakeUpAppTheme(content: @Composable () -> Unit) {
     )
 }
 
+val DeepBlack = Color(0xFF0E0E0E) // Background
+val MidGray = Color(0xFFBFBFBF) // Task panels/boxes
+//val SoftPink = Color(0xFFF6AEB2) // Accent (task check ✅)
+val SoftPink = Color(0xFFD9A5B3) // Accent (task check ✅)
+val PureWhite = Color(0xFFFFFFFF) // Buttons (text/borders)
+val PureBlack = Color(0xFF000000) // Icons/Text (main)
+val Gray = Color(0xFFA3A3A3) // Activity circles -- not sure if we should use this or MidGray for secondary
+val Gunmetal = Color(0xFF2A2E35)
+val LighterGunmetal = Color(0xFF3c4047)
+val EvenLighterGunmetal = Color(0xFF4f5359)
+val DarkGray = Color(0xFF2A2A2A) // text fields, modal surfaces, or inactive buttons.
+
+
 val DarkColorScheme = darkColorScheme(
     primary = SoftPink,       // Soft pink accent
     onPrimary = PureBlack,     // Text on pink (black)
@@ -26,8 +39,8 @@ val DarkColorScheme = darkColorScheme(
     surface = MidGray,       // Task card background
     onSurface = PureBlack,     // Text on card
 
-    secondary = Gray,     // Activity bubble fill
-    onSecondary = PureBlack,   // Icon/text on bubbles
+    secondary = Gunmetal,
+    onSecondary = PureWhite,
 
     secondaryContainer = DarkGray,
     onSecondaryContainer = PureWhite,

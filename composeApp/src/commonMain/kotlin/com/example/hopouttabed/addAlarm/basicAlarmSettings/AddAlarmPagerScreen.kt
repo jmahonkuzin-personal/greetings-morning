@@ -7,10 +7,11 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.backhandler.BackHandler
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.hopouttabed.AppBackHandler
 import com.example.hopouttabed.addAlarm.AddAlarmScreen
+import com.example.hopouttabed.addAlarm.sound.AlarmSoundPickerScreen
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundViewModel
 import kotlinx.coroutines.launch
 
@@ -42,7 +43,7 @@ fun AddAlarmPagerScreen(
                     alarmSoundUiState = alarmSoundUiState
                 )
 
-                BackHandler {
+                AppBackHandler {
                     onBackConfirmed()
                 }
             }
@@ -56,7 +57,7 @@ fun AddAlarmPagerScreen(
                     onSoundSelection = alarmSoundVm::updateSound
                 )
 
-                BackHandler {
+                AppBackHandler {
                     coroutineScope.launch { pagerState.animateScrollToPage(0) }
                 }
             }
