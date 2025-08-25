@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundUiState
 
 @Composable
 fun SelectedSoundSetting(

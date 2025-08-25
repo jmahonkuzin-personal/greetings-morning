@@ -12,7 +12,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.AppBackHandler
 import com.example.hopouttabed.addAlarm.AddAlarmScreen
 import com.example.hopouttabed.addAlarm.sound.AlarmSoundPickerScreen
+import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundViewModel
+import com.example.hopouttabed.addAlarm.viewModel.AlarmViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
@@ -24,6 +26,17 @@ fun AddAlarmPagerScreen(
     val pageCount = 2
     val pagerState = rememberPagerState(pageCount = { pageCount })
     val coroutineScope = rememberCoroutineScope()
+
+    val alarmVM: AlarmViewModel = viewModel()
+    val alarmUiState by alarmVM.uiState.collectAsStateWithLifecycle()
+    val alarmCallbacks: AlarmCallbacks = AlarmCallbacks(
+        updateTime = alarmVM::updateTime,
+        updateDisabledMinutes = alarmVM::updateDisabledMinutes,
+        updateAllowedAppsDuringDisable = alarmVM::updateAllowedAppsDuringDisable,
+        toggleVibrate = alarmVM::toggleVibrate,
+        toggleSnooze = alarmVM::toggleSnooze,
+        updateSound = alarmVM::updateSound
+    )
 
     val alarmSoundVm: AlarmSoundViewModel = viewModel()
     val alarmSoundUiState by alarmSoundVm.uiState.collectAsStateWithLifecycle()

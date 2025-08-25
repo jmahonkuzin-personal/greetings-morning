@@ -1,16 +1,16 @@
 package com.example.hopouttabed.addAlarm.basicAlarmSettings
 
 import androidx.compose.runtime.Composable
-import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsUiState
+import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
+import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
 
 @Composable
 fun BasicAlarmSettings(
-    basicSettingsUiState: BasicAlarmSettingsUiState,
-    callbacks: BasicAlarmSettingsCallbacks,
+    alarmUiState: AlarmUiState,
+    callbacks: AlarmCallbacks,
 ) {
-    val vibrateEnabled = basicSettingsUiState.hasVibrate
-    val snoozeEnabled = basicSettingsUiState.hasSnooze
+    val vibrateEnabled = alarmUiState.hasVibrate
+    val snoozeEnabled = alarmUiState.hasSnooze
     SettingsRowToggle(
         label = "Vibrate",
         switchState = vibrateEnabled,

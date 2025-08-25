@@ -15,6 +15,10 @@ kotlin = "2.2.0"
 kotlinx-datetime = "0.6.0"
 nav-version = "2.9.3"
 compose-foundation = "1.8.2"
+ksp = "2.2.0-2.0.2"
+room = "2.7.2"
+hilt = "2.57"
+androidxHilt = "1.2.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -24,7 +28,16 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx
 androidx-testExt-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-testExt" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
+
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler" , version.ref = "hilt"}
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name= "hilt-navigation-compose", version.ref = "androidxHilt" }
+
+
 #androidx-compose-ui = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
@@ -38,3 +51,4 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+googleDevtoolsKsp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

@@ -6,13 +6,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
+import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundUiState
+import com.example.hopouttabed.addAlarm.viewModel.AlarmViewModel
 import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsCallbacks
 import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsViewModel
 import com.example.hopouttabed.addAlarm.viewModel.TimePickerViewModel
@@ -25,11 +28,6 @@ fun AddAlarmScreen(
     onNavigateToSoundPicker: () -> Unit,
     alarmSoundUiState: AlarmSoundUiState
 ) {
-    val timePickerVM: TimePickerViewModel = viewModel()
-    val timePickerUiState by timePickerVM.uiState.collectAsStateWithLifecycle()
-
-    val alarmSettingsVm: BasicAlarmSettingsViewModel = viewModel()
-    val alarmSettingsUiState by alarmSettingsVm.uiState.collectAsStateWithLifecycle()
 
     var showConfirmDialog by remember { mutableStateOf(false) }
 
@@ -45,18 +43,17 @@ fun AddAlarmScreen(
                 .padding(vertical = 24.dp, horizontal = 16.dp)
         ) {
             WheelTimePicker(
-                timePickerUiState = timePickerUiState,
-                onTimeChanged = { timePickerVM::updateTime }
+                alarmUiState = alarmUiState,
+                onTimeChanged = { alarmVM::updateTime }
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             BasicAlarmSettings(
-                basicSettingsUiState = alarmSettingsUiState,
-                callbacks = BasicAlarmSettingsCallbacks(
-                    toggleVibrate = alarmSettingsVm::toggleVibrate,
-                    toggleSnooze = alarmSettingsVm::toggleSnooze,
-                    updateSound = alarmSettingsVm::updateSound,
+                alarmUiState = alarmUiState,
+                callbacks = AlarmCallbacks(
+                    toggleVibrate = alarmVM::toggleVibrate,
+                    toggleSnooze = alarmVM::toggleSnooze
                 )
             )
 
@@ -66,6 +63,26 @@ fun AddAlarmScreen(
             )
 
             MissionSettingsSection()
+            Text(
+                text = "Block phone for X time after waking up",
+                color = Color.Cyan
+            )
+            Text(
+                text = "Choose a song to play in the morning",
+                color = Color.Cyan
+            )
+            Text(
+                text = "Speak kindly to yourself -- play an audio where you speak kindly to yourself",
+                color = Color.Cyan
+            )
+            Text(
+                text = "Connect to your vision -- through journaling or audio or images",
+                color = Color.Cyan
+            )
+            Text(
+                text = "Breathwork",
+                color = Color.Cyan
+            )
 
             Spacer(modifier = Modifier.weight(1f))
 

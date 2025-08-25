@@ -7,17 +7,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
 import com.example.hopouttabed.addAlarm.viewModel.Meridiem
-import com.example.hopouttabed.addAlarm.viewModel.TimePickerUiState
 import kotlinx.datetime.LocalTime
 
 @Composable
 fun WheelTimePicker(
-    timePickerUiState: TimePickerUiState,
+    alarmUiState: AlarmUiState,
     onTimeChanged: (LocalTime) -> Unit
 ) {
-    val initialTime = timePickerUiState.time
-    val is24Hour = timePickerUiState.is24hour
+    val initialTime = alarmUiState.time
+    val is24Hour = true // TODO read from settings
     var selectedHour by remember { mutableStateOf(initialTime.hour) }
     var selectedMinute by remember { mutableStateOf(initialTime.minute) }
     var meridiem by remember {
