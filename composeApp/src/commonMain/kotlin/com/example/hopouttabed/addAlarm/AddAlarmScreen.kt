@@ -8,17 +8,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
+import com.example.hopouttabed.addAlarm.time.WheelTimePickerWrapper
 import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundUiState
-import com.example.hopouttabed.addAlarm.viewModel.AlarmViewModel
-import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.BasicAlarmSettingsViewModel
-import com.example.hopouttabed.addAlarm.viewModel.TimePickerViewModel
+import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
+import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
+import com.example.hopouttabed.theme.WakeUpAppTheme
+import kotlinx.datetime.LocalTime
+import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,7 +25,8 @@ fun AddAlarmScreen(
     onSave: () -> Unit,
     onBackConfirmed: () -> Unit,
     onNavigateToSoundPicker: () -> Unit,
-    alarmSoundUiState: AlarmSoundUiState
+    alarmUiState: AlarmUiState,
+    alarmCallbacks: AlarmCallbacks
 ) {
 
     var showConfirmDialog by remember { mutableStateOf(false) }
@@ -42,23 +42,20 @@ fun AddAlarmScreen(
                 .padding(innerPadding)
                 .padding(vertical = 24.dp, horizontal = 16.dp)
         ) {
-            WheelTimePicker(
-                alarmUiState = alarmUiState,
-                onTimeChanged = { alarmVM::updateTime }
+            WheelTimePickerWrapper(
+                time = alarmUiState.time,
+                onTimeChanged = alarmCallbacks.updateTime
             )
 
             Spacer(modifier = Modifier.height(24.dp))
 
             BasicAlarmSettings(
                 alarmUiState = alarmUiState,
-                callbacks = AlarmCallbacks(
-                    toggleVibrate = alarmVM::toggleVibrate,
-                    toggleSnooze = alarmVM::toggleSnooze
-                )
+                callbacks = alarmCallbacks
             )
 
             SelectedSoundSetting(
-                selectedSound = alarmSoundUiState.sound,
+                selectedSound = alarmUiState.sound,
                 onNavigateToSoundPicker = onNavigateToSoundPicker
             )
 
@@ -108,6 +105,42 @@ fun AddAlarmScreen(
             showConfirmDialog = showConfirmDialog,
             onDismiss = { showConfirmDialog = false },
             onBackConfirmed = onBackConfirmed
+        )
+    }
+}
+
+@Preview
+@Composable
+fun AddAlarmScreenPreview() {
+    // Mock state
+    val previewUiState = AlarmUiState(
+        time = LocalTime(7, 30),
+        disabledMinutes = 15,
+        allowedAppsDuringDisable = listOf("Messages", "Spotify"),
+        hasVibrate = true,
+        hasSnooze = false,
+        sound = AlarmSound.Beacon,
+        requireJournal = true
+    )
+
+    // Preview AlarmCallbacks (all no-ops)
+    val previewCallbacks = AlarmCallbacks(
+        updateTime = { _ -> },
+        updateDisabledMinutes = { _ -> },
+        updateAllowedAppsDuringDisable = { _ -> },
+        toggleVibrate = { _ -> },
+        toggleSnooze = { _ -> },
+        updateSound = { _ -> },
+        toggleRequireJournal = { _ -> }
+    )
+
+    WakeUpAppTheme {
+        AddAlarmScreen(
+            onSave = {},
+            onBackConfirmed = {},
+            onNavigateToSoundPicker = {},
+            alarmUiState = previewUiState,
+            alarmCallbacks = previewCallbacks
         )
     }
 }

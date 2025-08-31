@@ -53,7 +53,8 @@ fun AddAlarmPagerScreen(
                     onNavigateToSoundPicker = {
                         coroutineScope.launch { pagerState.animateScrollToPage(1) }
                     },
-                    alarmSoundUiState = alarmSoundUiState
+                    alarmUiState = alarmUiState,
+                    alarmCallbacks = alarmCallbacks
                 )
 
                 AppBackHandler {
@@ -66,8 +67,8 @@ fun AddAlarmPagerScreen(
                     onBack = {
                         coroutineScope.launch { pagerState.animateScrollToPage(0) }
                     },
-                    alarmSoundUiState = alarmSoundUiState,
-                    onSoundSelection = alarmSoundVm::updateSound
+                    alarmUiState = alarmUiState,
+                    onSoundSelection = alarmCallbacks.updateSound
                 )
 
                 AppBackHandler {

@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundUiState
+import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
 import com.example.hopouttabed.theme.EvenLighterGunmetal
 import com.example.hopouttabed.theme.WakeUpAppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -22,10 +23,10 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun AlarmSoundPickerScreen(
     onBack: () -> Unit,
-    alarmSoundUiState: AlarmSoundUiState,
+    alarmUiState: AlarmUiState,
     onSoundSelection: (AlarmSound) -> Unit
 ) {
-    val selectedSound = alarmSoundUiState.sound
+    val selectedSound = alarmUiState.sound
 
     val sounds = AlarmSound.entries
 
@@ -152,12 +153,12 @@ fun AlarmSoundPickerScreen(
 @Preview
 @Composable
 fun AlarmSoundPickerScreenPreview() {
-    val fakeUiState = AlarmSoundUiState(sound = AlarmSound.SunriseChimes)
+    val fakeUiState = AlarmUiState(sound = AlarmSound.SunriseChimes)
 
     WakeUpAppTheme {
         AlarmSoundPickerScreen(
             onBack = {},
-            alarmSoundUiState = fakeUiState,
+            alarmUiState = fakeUiState,
             onSoundSelection = {}
         )
     }
