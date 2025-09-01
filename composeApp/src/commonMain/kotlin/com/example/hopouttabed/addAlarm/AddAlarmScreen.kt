@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.hopouttabed.AlarmTimePickerHost
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
@@ -42,10 +43,15 @@ fun AddAlarmScreen(
                 .padding(innerPadding)
                 .padding(vertical = 24.dp, horizontal = 16.dp)
         ) {
-            WheelTimePickerWrapper(
-                time = alarmUiState.time,
-                onTimeChanged = alarmCallbacks.updateTime
+            AlarmTimePickerHost(
+                show = true,
+                onDismiss = {},
+                onTimeSelected = alarmCallbacks.updateTime
             )
+//            WheelTimePickerWrapper(
+//                time = alarmUiState.time,
+//                onTimeChanged = alarmCallbacks.updateTime
+//            )
 
             Spacer(modifier = Modifier.height(24.dp))
 
@@ -125,7 +131,7 @@ fun AddAlarmScreenPreview() {
 
     // Preview AlarmCallbacks (all no-ops)
     val previewCallbacks = AlarmCallbacks(
-        updateTime = { _ -> },
+        updateTime = { _, _ -> },
         updateDisabledMinutes = { _ -> },
         updateAllowedAppsDuringDisable = { _ -> },
         toggleVibrate = { _ -> },

@@ -10,7 +10,7 @@ actual class AlarmTimePickerProvider {
 class IOSAlarmTimePicker : AlarmTimePicker {
     @Composable
     override fun TimePicker(
-        onConfirm: () -> Unit,
+        onConfirm: (hour: Int, minute: Int) -> Unit,
         onDismiss: () -> Unit
     ) {
         // Native iOS picker or placeholder

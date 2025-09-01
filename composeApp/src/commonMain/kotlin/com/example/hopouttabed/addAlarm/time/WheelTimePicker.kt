@@ -19,7 +19,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Composable
 fun WheelTimePickerWrapper(
     time: LocalTime,
-    onTimeChanged: (LocalTime) -> Unit
+    onTimeChanged: (hour: Int, minute: Int) -> Unit
 ) {
     val bg = MaterialTheme.colorScheme.background
     val itemHeight = 64.dp
@@ -31,7 +31,7 @@ fun WheelTimePickerWrapper(
         contentAlignment = Alignment.Center
     ) {
 
-        WheelTime(time, onTimeChanged, itemHeight, modifier)
+//        WheelTime(time, onTimeChanged, itemHeight, modifier)
 
         // Top scrim: background -> semi -> transparent
         Box(
@@ -127,21 +127,21 @@ fun WheelTime(
     }
 }
 
-@Preview
-@Composable
-fun WheelTimePickerPreview() {
-    // Start with a sample time (7:30)
-    var previewTime by remember { mutableStateOf(LocalTime(7, 30)) }
-
-    WakeUpAppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            WheelTimePickerWrapper(
-                time = previewTime,
-                onTimeChanged = { previewTime = it } // updates local state so preview stays reactive
-            )
-        }
-    }
-}
+//@Preview
+//@Composable
+//fun WheelTimePickerPreview() {
+//    // Start with a sample time (7:30)
+//    var previewTime by remember { mutableStateOf(LocalTime(7, 30)) }
+//
+//    WakeUpAppTheme {
+//        Surface(
+//            modifier = Modifier.fillMaxSize(),
+//            color = MaterialTheme.colorScheme.background
+//        ) {
+//            WheelTimePickerWrapper(
+//                time = previewTime,
+//                onTimeChanged = { previewTime = it } // updates local state so preview stays reactive
+//            )
+//        }
+//    }
+//}

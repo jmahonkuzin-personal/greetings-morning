@@ -18,7 +18,7 @@ data class AlarmUiState(
 )
 
 data class AlarmCallbacks(
-    val updateTime: (LocalTime) -> Unit = {},
+    val updateTime: (hour: Int, minute: Int) -> Unit = { _, _ -> },
     val updateDisabledMinutes: (Int) -> Unit = {},
     val updateAllowedAppsDuringDisable: (List<String>) -> Unit = {},
     val toggleVibrate: (Boolean) -> Unit = {},
@@ -32,10 +32,10 @@ class AlarmViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(AlarmUiState())
     val uiState: StateFlow<AlarmUiState> = _uiState.asStateFlow()
 
-    fun updateTime(newTime: LocalTime) {
+    fun updateTime(hour: Int, minute: Int) {
         _uiState.update { current ->
             current.copy(
-                time = newTime
+                time = LocalTime(hour, minute)
             )
         }
     }

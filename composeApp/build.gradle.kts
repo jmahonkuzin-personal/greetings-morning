@@ -34,12 +34,11 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation("com.jakewharton.timber:timber:5.0.1")
-//            implementation(libs.androidx.navigation)
             implementation(libs.androidx.compose.foundation)
 
             // Room (Database)
             implementation(libs.androidx.room.runtime)
-//            ksp(libs.androidx.room.compiler)
+            implementation(libs.material3)
 
             // Hilt (Dependency Injection)
             implementation(libs.hilt.android)

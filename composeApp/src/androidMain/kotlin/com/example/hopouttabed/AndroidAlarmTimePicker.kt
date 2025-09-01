@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.hopouttabed.time.M3TimePickerDialog
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.format
 import java.time.format.DateTimeFormatter
@@ -26,9 +27,13 @@ actual class AlarmTimePickerProvider {
 class AndroidAlarmTimePicker : AlarmTimePicker {
     @Composable
     override fun TimePicker(
-        onConfirm: () -> Unit,
+        onConfirm: (hour: Int, minute: Int) -> Unit,
         onDismiss: () -> Unit
     ) {
+        M3TimePickerDialog(
+            onDismiss = onDismiss,
+            onConfirm = onConfirm
+        )
         // You can use a Material Time Picker or a custom one
 //        AndroidTimePicker()
     }

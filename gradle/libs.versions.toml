@@ -19,6 +19,7 @@ ksp = "2.2.0-2.0.2"
 room = "2.7.2"
 hilt = "2.57"
 androidxHilt = "1.2.0"
+compose_material3 = "1.5.0-alpha03"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -44,6 +45,8 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 androidx-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "nav-version" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose-foundation" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "compose_material3" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

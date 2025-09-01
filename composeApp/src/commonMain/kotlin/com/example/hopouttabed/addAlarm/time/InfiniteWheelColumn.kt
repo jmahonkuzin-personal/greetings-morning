@@ -55,20 +55,33 @@ fun InfiniteWheelColumn(
         label = "scrollColor"
     )
 
+    val mid by remember {
+        derivedStateOf {
+            val visibleItems = listState.layoutInfo.visibleItemsInfo
+            if (visibleItems.isEmpty()) {
+                1
+            } else {
+                visibleItems.getOrNull(visibleItems.size / 2)?.index // return index of middle visible item
+            }
+        }
+    }
+
     LaunchedEffect(listState.isScrollInProgress) {
+
         if (!listState.isScrollInProgress) {
-            val firstItemOffset = listState.firstVisibleItemScrollOffset
-            val firstItemIndex = listState.firstVisibleItemIndex
-            val pxItemHeight = with(density) { itemHeight.toPx() }
-            val offsetItems = (firstItemOffset / pxItemHeight).roundToInt()
+//            val firstItemOffset = listState.firstVisibleItemScrollOffset
+//            val firstItemIndex = listState.firstVisibleItemIndex
+//            val pxItemHeight = with(density) { itemHeight.toPx() }
+//            val offsetItems = (firstItemOffset / pxItemHeight).roundToInt()
 // Only need to hop between the top item and the one below it:
-            val centerIndex = (/* firstVisibleItemIndex = 0 */ + 1 /* centerSlot */ + offsetItems)
-                .coerceIn(0, 1)
+//            val centerIndex = (/* firstVisibleItemIndex = 0 */ + 1 /* centerSlot */ + offsetItems)
+//                .coerceIn(0, 1)
             // approximate how many items scrolled within the first visible row
 //            val offsetItems = (firstItemOffset / pxItemHeight).roundToInt()
 //            val centerIndex = (firstItemIndex + centerSlot + offsetItems)
 //                .coerceIn(0, items.lastIndex)
 
+            val centerIndex = mid ?: 1
             val centered = items[centerIndex]
             if (centered != selectedItem) {
                 onItemSelected(centered)
@@ -82,6 +95,7 @@ fun InfiniteWheelColumn(
         flingBehavior = fling,
         contentPadding = PaddingValues(vertical = itemHeight * (visibleItems / 2))
     ) {
+//        items(items = loopedItems.size, key = { it }) { i ->
         items(loopedItems.size) { i ->
             val value = loopedItems[i]
             Text(
