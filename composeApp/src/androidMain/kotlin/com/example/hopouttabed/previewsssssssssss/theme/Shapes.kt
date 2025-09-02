@@ -1,4 +1,4 @@
-package com.example.hopouttabed.PREVIEWS.theme
+package com.example.hopouttabed.previewsssssssssss.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

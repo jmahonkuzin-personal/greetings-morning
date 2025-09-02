@@ -3,6 +3,7 @@ package com.example.hopouttabed
 import androidx.compose.runtime.Composable
 
 // iosMain
+@Suppress("EXPECT_ACTUAL_CLASSIFIERS_ARE_IN_BETA_WARNING")
 actual class AlarmTimePickerProvider {
     actual fun getTimePicker(): AlarmTimePicker = IOSAlarmTimePicker()
 }

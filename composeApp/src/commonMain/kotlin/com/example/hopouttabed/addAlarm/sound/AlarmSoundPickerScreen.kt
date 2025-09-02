@@ -8,12 +8,12 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.*
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundUiState
 import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
 import com.example.hopouttabed.theme.EvenLighterGunmetal
 import com.example.hopouttabed.theme.WakeUpAppTheme
@@ -47,7 +47,7 @@ fun AlarmSoundPickerScreen(
                             color = MaterialTheme.colorScheme.onBackground
                         )
                     },
-                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    colors = topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.background
                     )
                 )

@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.hopouttabed.AlarmTimePickerHost
+import com.example.hopouttabed.AlarmTimePickerProvider
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
@@ -31,6 +32,10 @@ fun AddAlarmScreen(
 ) {
 
     var showConfirmDialog by remember { mutableStateOf(false) }
+    val provider: AlarmTimePickerProvider = AlarmTimePickerProvider()
+
+    val picker = provider.getTimePicker()
+
 
     Scaffold(
         topBar = {
@@ -43,11 +48,19 @@ fun AddAlarmScreen(
                 .padding(innerPadding)
                 .padding(vertical = 24.dp, horizontal = 16.dp)
         ) {
-            AlarmTimePickerHost(
-                show = true,
-                onDismiss = {},
-                onTimeSelected = alarmCallbacks.updateTime
+            Text(text = alarmUiState.time.toString())
+            picker.TimePicker(
+                initialHour = 7,
+                initialMinute = 30,
+                is24Hour = false,
+                onConfirm = alarmCallbacks.updateTime,
+                onDismiss = { }
             )
+//            AlarmTimePickerHost(
+//                show = true,
+//                onDismiss = {},
+//                onTimeSelected = alarmCallbacks.updateTime
+//            )
 //            WheelTimePickerWrapper(
 //                time = alarmUiState.time,
 //                onTimeChanged = alarmCallbacks.updateTime

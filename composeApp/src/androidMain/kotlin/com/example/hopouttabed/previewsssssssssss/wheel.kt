@@ -1,4 +1,4 @@
-package com.example.hopouttabed.PREVIEWS
+package com.example.hopouttabed.previewsssssssssss
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -68,6 +68,7 @@ fun AlarmListPreview() {
                 .background(Color.Black), // Preview background
             contentAlignment = Alignment.Center
         ) {
+            @Suppress("UNCHECKED_CAST")
             AlarmList(
                 alarms,
                 onToggle = { } as (Int, Boolean) -> Unit

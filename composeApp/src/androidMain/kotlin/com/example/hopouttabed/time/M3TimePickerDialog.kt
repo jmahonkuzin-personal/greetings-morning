@@ -6,8 +6,8 @@ import androidx.compose.material.icons.outlined.Keyboard
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import java.time.LocalTime
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -17,8 +17,11 @@ fun M3TimePickerDialog(
     initialMinute: Int = 30,
     is24Hour: Boolean = false,
     onDismiss: () -> Unit,
-    onConfirm: (hour: Int, minute: Int) -> Unit
+    onConfirm: (hour: Int, minute: Int) -> Unit,
+    state: TimePickerState
 ) {
+    var showPicker by rememberSaveable { mutableStateOf(true) }
+
     val state = rememberTimePickerState(
         initialHour = initialHour,
         initialMinute = initialMinute,
@@ -26,35 +29,48 @@ fun M3TimePickerDialog(
     )
     var inputMode by remember { mutableStateOf(false) }
 
-    TimePickerDialog(
-        onDismissRequest = onDismiss,
-        confirmButton = {
-            TextButton(onClick = { onConfirm(state.hour, state.minute) }) {
-                Text("OK")
-            }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismiss) { Text("Cancel") }
-        },
-        title = {
-            Row(
-                Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text("Select time", style = MaterialTheme.typography.titleLarge)
+    if (showPicker) {
+        TimePickerDialog(
+            onDismissRequest = {
+                onDismiss
+                showPicker = false
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    onConfirm(state.hour, state.minute)
+                    showPicker = false
+                }) {
+                    Text("OK")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    onDismiss
+                    showPicker = false
+                }) { Text("Cancel") }
+            },
+            modeToggleButton = {
                 IconButton(onClick = { inputMode = !inputMode }) {
                     Icon(
                         imageVector = if (inputMode) Icons.Outlined.Schedule else Icons.Outlined.Keyboard,
                         contentDescription = if (inputMode) "Switch to dial" else "Switch to input"
                     )
                 }
+            },
+            title = {
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text("Select time", style = MaterialTheme.typography.titleLarge)
+                }
             }
-        }
-    ) {
-        if (inputMode) {
-            TimeInput(state = state)
-        } else {
-            TimePicker(state = state)
+        ) {
+            if (inputMode) {
+                TimeInput(state = state)
+            } else {
+                TimePicker(state = state)
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.hopouttabed.PREVIEWS.theme
+package com.example.hopouttabed.previewsssssssssss.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable

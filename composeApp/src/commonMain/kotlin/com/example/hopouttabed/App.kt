@@ -1,46 +1,38 @@
 package com.example.hopouttabed
 
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.addAlarm.AddAlarmScreen
+import com.example.hopouttabed.addAlarm.basicAlarmSettings.AddAlarmPagerScreen
 import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
-import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
+import com.example.hopouttabed.addAlarm.viewModel.AlarmViewModel
 import com.example.hopouttabed.theme.WakeUpAppTheme
-import kotlinx.datetime.LocalTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
 fun App() {
-    // Mock state
-    val previewUiState = AlarmUiState(
-        time = LocalTime(7, 30),
-        disabledMinutes = 15,
-        allowedAppsDuringDisable = listOf("Messages", "Spotify"),
-        hasVibrate = true,
-        hasSnooze = false,
-        sound = AlarmSound.Beacon,
-        requireJournal = true
-    )
-
-    // Preview AlarmCallbacks (all no-ops)
-    val previewCallbacks = AlarmCallbacks(
-        updateTime = { _, _ -> },
-        updateDisabledMinutes = { _ -> },
-        updateAllowedAppsDuringDisable = { _ -> },
-        toggleVibrate = { _ -> },
-        toggleSnooze = { _ -> },
-        updateSound = { _ -> },
-        toggleRequireJournal = { _ -> }
-    )
+//    // Mock state
+//    val pageCount = 2
+//    val pagerState = rememberPagerState(pageCount = { pageCount })
+//    val coroutineScope = rememberCoroutineScope()
+//
+//    val alarmVM: AlarmViewModel = viewModel()
+//    val alarmUiState by alarmVM.uiState.collectAsStateWithLifecycle()
+//    val alarmCallbacks: AlarmCallbacks = AlarmCallbacks(
+//        updateTime = alarmVM::updateTime,
+//        updateDisabledMinutes = alarmVM::updateDisabledMinutes,
+//        updateAllowedAppsDuringDisable = alarmVM::updateAllowedAppsDuringDisable,
+//        toggleVibrate = alarmVM::toggleVibrate,
+//        toggleSnooze = alarmVM::toggleSnooze,
+//        updateSound = alarmVM::updateSound
+//    )
 
     WakeUpAppTheme {
-        AddAlarmScreen(
-            onSave = {},
-            onBackConfirmed = {},
-            onNavigateToSoundPicker = {},
-            alarmUiState = previewUiState,
-            alarmCallbacks = previewCallbacks
-        )
+        AlarmNavHost()
     }
 }

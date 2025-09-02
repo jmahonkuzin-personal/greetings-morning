@@ -6,6 +6,9 @@ import androidx.compose.runtime.Composable
 interface AlarmTimePicker {
     @Composable
     fun TimePicker(
+        initialHour: Int = 0,
+        initialMinute: Int = 0,
+        is24Hour: Boolean = false,
         onConfirm: (hour: Int, minute: Int) -> Unit,
         onDismiss: () -> Unit
     )

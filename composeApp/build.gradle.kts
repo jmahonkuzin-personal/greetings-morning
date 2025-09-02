@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.googleDevtoolsKsp)
+    alias(libs.plugins.androidXRoom)
 }
 
 kotlin {
@@ -89,6 +90,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    room {
+        // Room will export schema files here
+        schemaDirectory("$projectDir/schemas")
     }
 }
 

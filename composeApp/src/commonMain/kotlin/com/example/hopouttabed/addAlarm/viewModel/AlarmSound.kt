@@ -31,21 +31,3 @@ enum class AlarmSound(val displayName: String) {
             entries.firstOrNull { it.displayName == name }
     }
 }
-
-data class AlarmSoundUiState(
-    val sound: AlarmSound = AlarmSound.Beacon
-)
-
-class AlarmSoundViewModel : ViewModel() {
-
-    private val _uiState = MutableStateFlow(AlarmSoundUiState())
-    val uiState: StateFlow<AlarmSoundUiState> = _uiState.asStateFlow()
-
-    fun updateSound(sound: AlarmSound) {
-        _uiState.update { current ->
-            current.copy(
-                sound = sound
-            )
-        }
-    }
-}

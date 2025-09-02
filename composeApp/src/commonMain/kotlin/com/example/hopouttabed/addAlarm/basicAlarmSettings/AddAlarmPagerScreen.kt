@@ -13,7 +13,6 @@ import com.example.hopouttabed.AppBackHandler
 import com.example.hopouttabed.addAlarm.AddAlarmScreen
 import com.example.hopouttabed.addAlarm.sound.AlarmSoundPickerScreen
 import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSoundViewModel
 import com.example.hopouttabed.addAlarm.viewModel.AlarmViewModel
 import kotlinx.coroutines.launch
 
@@ -37,9 +36,6 @@ fun AddAlarmPagerScreen(
         toggleSnooze = alarmVM::toggleSnooze,
         updateSound = alarmVM::updateSound
     )
-
-    val alarmSoundVm: AlarmSoundViewModel = viewModel()
-    val alarmSoundUiState by alarmSoundVm.uiState.collectAsStateWithLifecycle()
 
     HorizontalPager(
         state = pagerState,
