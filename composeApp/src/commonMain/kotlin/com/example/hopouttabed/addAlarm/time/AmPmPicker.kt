@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
-import com.example.hopouttabed.addAlarm.viewModel.Meridiem
+import com.example.hopouttabed.addAlarm.Meridiem
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 

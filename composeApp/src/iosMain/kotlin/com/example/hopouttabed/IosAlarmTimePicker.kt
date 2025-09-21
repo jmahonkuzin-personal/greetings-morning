@@ -11,6 +11,9 @@ actual class AlarmTimePickerProvider {
 class IOSAlarmTimePicker : AlarmTimePicker {
     @Composable
     override fun TimePicker(
+        initialHour: Int,
+        initialMinute: Int,
+        is24Hour: Boolean,
         onConfirm: (hour: Int, minute: Int) -> Unit,
         onDismiss: () -> Unit
     ) {

@@ -1,12 +1,16 @@
 package com.example.hopouttabed.dashboard.viewModel
 
 import androidx.lifecycle.ViewModel
+import com.example.hopouttabed.data.AlarmRepository
+import com.example.hopouttabed.data.DI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class DashboardViewModel : ViewModel() {
+class DashboardViewModel(
+    private val repository: AlarmRepository = DI.alarmRepository
+) : ViewModel() {
 
     private val _alarms = MutableStateFlow<List<AlarmUiModel>>(
         listOf(
@@ -26,21 +30,6 @@ class DashboardViewModel : ViewModel() {
             }
         }
     }
-
-//    fun updateActiveDay(index: Int, day: String, active: Boolean) {
-//        _alarms.update { list ->
-//            list.mapIndexed { i, alarm ->
-//                if (i == index) {
-//                    val updatedDays = if (active) {
-//                        alarm.activeDays + day
-//                    } else {
-//                        alarm.activeDays - day
-//                    }
-//                    alarm.copy(activeDays = updatedDays)
-//                } else alarm
-//            }
-//        }
-//    }
 
     fun addAlarm(alarm: AlarmUiModel) {
         _alarms.update { it + alarm }

@@ -1,10 +1,15 @@
-package com.example.hopouttabed.addAlarm.viewModel
+package com.example.hopouttabed.viewModel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.hopouttabed.data.Alarm
+import com.example.hopouttabed.data.AlarmRepository
+import com.example.hopouttabed.data.DI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalTime
 
 data class AlarmUiState(
@@ -27,10 +32,36 @@ data class AlarmCallbacks(
     val toggleRequireJournal: (Boolean) -> Unit = {}
 )
 
-class AlarmViewModel : ViewModel() {
+class AlarmViewModel(
+    private val repository: AlarmRepository = DI.alarmRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AlarmUiState())
     val uiState: StateFlow<AlarmUiState> = _uiState.asStateFlow()
+
+    fun saveAlarm() {
+        viewModelScope.launch {
+            val uiState = _uiState.value
+
+            val alarm = Alarm(
+                hour = uiState.time.hour,
+                minute = uiState.time.minute,
+                disabledMinutes = uiState.disabledMinutes,
+                allowedAppsDuringDisable = uiState.allowedAppsDuringDisable,
+                hasVibrate = uiState.hasVibrate,
+                hasSnooze = uiState.hasSnooze,
+                sound = uiState.sound.toString(),
+                requireJournal = uiState.requireJournal
+            )
+            repository.insert(alarm) // or alarm.toEntity() if your DB uses AlarmEntity
+        }
+    }
+
+    suspend fun deleteAlarm(alarm: Alarm) {
+        viewModelScope.launch {
+            repository.delete(alarm)
+        }
+    }
 
     fun updateTime(hour: Int, minute: Int) {
         _uiState.update { current ->

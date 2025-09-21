@@ -9,11 +9,11 @@ import androidx.room.Query
 interface AlarmDao {
 
     @Query("SELECT * FROM alarm")
-    fun getAll(): List<Alarm>
+    suspend fun getAll(): List<AlarmEntity>
 
     @Insert
-    fun insert(vararg alarm: Alarm)
+    suspend fun insert(vararg alarmEntity: AlarmEntity)
 
     @Delete
-    fun delete(alarm: Alarm)
+    suspend fun delete(alarmEntity: AlarmEntity)
 }

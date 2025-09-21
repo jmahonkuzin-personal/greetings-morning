@@ -7,4 +7,7 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.googleDevtoolsKsp) apply false
+    alias(libs.plugins.androidXRoom) apply false
+//    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20-RC2" apply false
+
 }

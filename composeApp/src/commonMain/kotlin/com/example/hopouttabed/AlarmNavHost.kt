@@ -19,7 +19,7 @@ fun AlarmNavHost() {
         }
         composable("addAlarmPager") {
             AddAlarmPagerScreen(
-                onSave = { navController.navigate("dashboard") },
+                navigateHome = { navController.navigate("dashboard") },
                 onBackConfirmed = { navController.popBackStack() }
             )
         }

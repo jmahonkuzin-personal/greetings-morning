@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f3d102fada7fb82ffa02680094680e01",
+    "identityHash": "3d7c98804fc4653d0505fd9af17463d0",
     "entities": [
       {
         "tableName": "alarm",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `hour` INTEGER NOT NULL, `minute` INTEGER NOT NULL, `missions` TEXT NOT NULL, `is_enabled` INTEGER NOT NULL, `active_days` TEXT NOT NULL, PRIMARY KEY(`uuid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `hour` INTEGER NOT NULL, `minute` INTEGER NOT NULL, `disabledMinutes` INTEGER NOT NULL, `allowedAppsDuringDisable` TEXT NOT NULL, `hasVibrate` INTEGER NOT NULL, `hasSnooze` INTEGER NOT NULL, `sound` TEXT NOT NULL, `requireJournal` INTEGER NOT NULL, PRIMARY KEY(`uuid`))",
         "fields": [
           {
             "fieldPath": "uuid",
@@ -27,21 +27,39 @@
             "notNull": true
           },
           {
-            "fieldPath": "missions",
-            "columnName": "missions",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isEnabled",
-            "columnName": "is_enabled",
+            "fieldPath": "disabledMinutes",
+            "columnName": "disabledMinutes",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "activeDays",
-            "columnName": "active_days",
+            "fieldPath": "allowedAppsDuringDisable",
+            "columnName": "allowedAppsDuringDisable",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hasVibrate",
+            "columnName": "hasVibrate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hasSnooze",
+            "columnName": "hasSnooze",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sound",
+            "columnName": "sound",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "requireJournal",
+            "columnName": "requireJournal",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -55,7 +73,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f3d102fada7fb82ffa02680094680e01')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3d7c98804fc4653d0505fd9af17463d0')"
     ]
   }
 }

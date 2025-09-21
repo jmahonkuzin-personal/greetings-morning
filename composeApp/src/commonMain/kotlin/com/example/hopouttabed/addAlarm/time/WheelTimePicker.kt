@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.hopouttabed.addAlarm.viewModel.Meridiem
+import com.example.hopouttabed.addAlarm.Meridiem
 import com.example.hopouttabed.theme.WakeUpAppTheme
 import kotlinx.datetime.LocalTime
 import org.jetbrains.compose.ui.tooling.preview.Preview

@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
-import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
+import com.example.hopouttabed.viewModel.AlarmSound
+import com.example.hopouttabed.viewModel.AlarmUiState
 import com.example.hopouttabed.theme.EvenLighterGunmetal
 import com.example.hopouttabed.theme.WakeUpAppTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview

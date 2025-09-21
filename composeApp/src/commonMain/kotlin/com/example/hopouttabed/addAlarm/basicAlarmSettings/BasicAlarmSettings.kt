@@ -1,8 +1,8 @@
 package com.example.hopouttabed.addAlarm.basicAlarmSettings
 
 import androidx.compose.runtime.Composable
-import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
+import com.example.hopouttabed.viewModel.AlarmCallbacks
+import com.example.hopouttabed.viewModel.AlarmUiState
 
 @Composable
 fun BasicAlarmSettings(

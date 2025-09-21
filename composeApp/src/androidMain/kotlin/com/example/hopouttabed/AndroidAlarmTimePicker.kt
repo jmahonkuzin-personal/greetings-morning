@@ -21,13 +21,7 @@ class AndroidAlarmTimePicker : AlarmTimePicker {
         onConfirm: (hour: Int, minute: Int) -> Unit,
         onDismiss: () -> Unit
     ) {
-        val state = rememberTimePickerState(
-            initialHour = initialHour,
-            initialMinute = initialMinute,
-            is24Hour = is24Hour
-        )
         M3TimePickerDialog(
-            state = state,
             onDismiss = onDismiss,
             onConfirm = onConfirm
         )

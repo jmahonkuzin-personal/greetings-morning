@@ -12,14 +12,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.AppBackHandler
 import com.example.hopouttabed.addAlarm.AddAlarmScreen
 import com.example.hopouttabed.addAlarm.sound.AlarmSoundPickerScreen
-import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.AlarmViewModel
+import com.example.hopouttabed.viewModel.AlarmCallbacks
+import com.example.hopouttabed.viewModel.AlarmViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Composable
 fun AddAlarmPagerScreen(
-    onSave: () -> Unit,
+    navigateHome: () -> Unit,
     onBackConfirmed: () -> Unit
 ) {
     val pageCount = 2
@@ -44,7 +44,10 @@ fun AddAlarmPagerScreen(
         when (page) {
             0 -> {
                 AddAlarmScreen(
-                    onSave = onSave,
+                    onSave = {
+                        alarmVM.saveAlarm()
+                        navigateHome
+                    },
                     onBackConfirmed = onBackConfirmed,
                     onNavigateToSoundPicker = {
                         coroutineScope.launch { pagerState.animateScrollToPage(1) }

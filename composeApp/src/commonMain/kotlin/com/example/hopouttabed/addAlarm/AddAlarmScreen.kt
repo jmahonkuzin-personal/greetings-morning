@@ -8,15 +8,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.hopouttabed.AlarmTimePickerHost
 import com.example.hopouttabed.AlarmTimePickerProvider
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
 import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
-import com.example.hopouttabed.addAlarm.time.WheelTimePickerWrapper
-import com.example.hopouttabed.addAlarm.viewModel.AlarmCallbacks
-import com.example.hopouttabed.addAlarm.viewModel.AlarmSound
-import com.example.hopouttabed.addAlarm.viewModel.AlarmUiState
+import com.example.hopouttabed.viewModel.AlarmCallbacks
+import com.example.hopouttabed.viewModel.AlarmSound
+import com.example.hopouttabed.viewModel.AlarmUiState
 import com.example.hopouttabed.theme.WakeUpAppTheme
 import kotlinx.datetime.LocalTime
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -100,10 +98,17 @@ fun AddAlarmScreen(
                 color = Color.Cyan
             )
 
+            Text(
+                text = "Add a morning reminder",
+                color = Color.Cyan
+            )
+
             Spacer(modifier = Modifier.weight(1f))
 
             FloatingActionButton(
-                onClick = onSave,
+                onClick = {
+                    onSave
+                },
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary,
                 shape = MaterialTheme.shapes.medium,
@@ -162,4 +167,8 @@ fun AddAlarmScreenPreview() {
             alarmCallbacks = previewCallbacks
         )
     }
+}
+
+enum class Meridiem {
+    AM, PM
 }

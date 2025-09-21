@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.Color
 fun WakeUpAppTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = DarkColorScheme,
-        typography = rememberWakeUpAppTypography(),
+//        typography = rememberWakeUpAppTypography(),
         shapes = WakeUpShapes,
         content = content,
     )
