@@ -46,7 +46,7 @@ fun AddAlarmPagerScreen(
                 AddAlarmScreen(
                     onSave = {
                         alarmVM.saveAlarm()
-                        navigateHome
+                        navigateHome()
                     },
                     onBackConfirmed = onBackConfirmed,
                     onNavigateToSoundPicker = {

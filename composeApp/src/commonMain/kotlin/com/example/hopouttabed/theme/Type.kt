@@ -25,7 +25,7 @@ fun rememberWakeUpAppTypography(): Typography {
     val robotoMono = robotoMonoFontFamily()
 
     return Typography(
-        displayLarge = TextStyle(fontSize = 34.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
+        displayLarge = TextStyle(fontSize = 48.sp, fontWeight = FontWeight.Medium, fontFamily = robotoMono),
         displayMedium = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
         headlineLarge = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold, fontFamily = robotoMono),
         headlineMedium = TextStyle(fontSize = 20.sp, fontWeight = FontWeight.Medium, fontFamily = robotoMono),

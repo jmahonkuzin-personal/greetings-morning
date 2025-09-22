@@ -23,15 +23,17 @@ expect class AlarmTimePickerProvider() { //the parentheses () after the class na
 @Composable
 fun AlarmTimePickerHost(
     show: Boolean,
-    onDismiss: () -> Unit,
-    onTimeSelected: (hour: Int, minute: Int) -> Unit,
-    provider: AlarmTimePickerProvider = AlarmTimePickerProvider()
+    onClose: () -> Unit,
+    onConfirm: (hour: Int, minute: Int) -> Unit,
 ) {
     if (!show) return
-    // Grab the platform picker once
+    val provider = AlarmTimePickerProvider()
     val picker = provider.getTimePicker()
     picker.TimePicker(
-        onConfirm = { h, m -> onTimeSelected(h, m) },
-        onDismiss = onDismiss
+        onConfirm = { h, m ->
+            onConfirm(h, m)
+            onClose()
+        },
+        onDismiss = onClose
     )
 }

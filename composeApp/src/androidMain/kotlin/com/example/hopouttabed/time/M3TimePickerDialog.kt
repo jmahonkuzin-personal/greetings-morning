@@ -1,17 +1,18 @@
 package com.example.hopouttabed.time
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Keyboard
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.runtime.Composable
-import com.example.hopouttabed.theme.WakeUpAppTheme
 import androidx.compose.ui.unit.dp
+import com.example.hopouttabed.theme.WakeUpAppTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,8 +24,6 @@ fun M3TimePickerDialog(
     onDismiss: () -> Unit,
     onConfirm: (hour: Int, minute: Int) -> Unit
 ) {
-    var showPicker by rememberSaveable { mutableStateOf(true) }
-
     val state = rememberTimePickerState(
         initialHour = initialHour,
         initialMinute = initialMinute,
@@ -32,49 +31,41 @@ fun M3TimePickerDialog(
     )
     var inputMode by remember { mutableStateOf(false) }
 
-    if (showPicker) {
-        TimePickerDialog(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            onDismissRequest = {
-                onDismiss
-                showPicker = false
-            },
-            confirmButton = {
-                TextButton(onClick = {
-                    onConfirm(state.hour, state.minute)
-                    showPicker = false
-                }) {
-                    Text(text = "OK", color = MaterialTheme.colorScheme.onSecondary)
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = {
-                    onDismiss
-                    showPicker = false
-                }) { Text(text = "Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant) }
-            },
-            modeToggleButton = {
-                IconButton(onClick = { inputMode = !inputMode }) {
-                    Icon(
-                        imageVector = if (inputMode) Icons.Outlined.Schedule else Icons.Outlined.Keyboard,
-                        contentDescription = if (inputMode) "Switch to dial" else "Switch to input"
-                    )
-                }
-            },
-            title = {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "Select time",
-                        style = MaterialTheme.typography.titleLarge
-                    )
-                }
+    TimePickerDialog(
+        containerColor = MaterialTheme.colorScheme.secondary,
+        onDismissRequest = onDismiss,
+        confirmButton = {
+            TextButton(onClick = {
+                onConfirm(state.hour, state.minute)
+            }) {
+                Text(text = "OK", color = MaterialTheme.colorScheme.primary)
             }
-        ) {
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text(text = "Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        },
+        modeToggleButton = {
+            IconButton(onClick = { inputMode = !inputMode }) {
+                Icon(
+                    imageVector = if (inputMode) Icons.Outlined.Schedule else Icons.Outlined.Keyboard,
+                    contentDescription = if (inputMode) "Switch to dial" else "Switch to input"
+                )
+            }
+        },
+        title = {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "Select time",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+        },
+        content = {
             if (inputMode) {
                 TimeInput(
                     state = state,
@@ -87,7 +78,7 @@ fun M3TimePickerDialog(
                 )
             }
         }
-    }
+    )
 }
 
 @Preview
