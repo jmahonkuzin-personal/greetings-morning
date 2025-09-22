@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
 import com.example.hopouttabed.theme.WakeUpAppTheme
+import androidx.compose.ui.unit.dp
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,6 +34,7 @@ fun M3TimePickerDialog(
 
     if (showPicker) {
         TimePickerDialog(
+            containerColor = MaterialTheme.colorScheme.secondary,
             onDismissRequest = {
                 onDismiss
                 showPicker = false
@@ -42,14 +44,14 @@ fun M3TimePickerDialog(
                     onConfirm(state.hour, state.minute)
                     showPicker = false
                 }) {
-                    Text("OK")
+                    Text(text = "OK", color = MaterialTheme.colorScheme.onSecondary)
                 }
             },
             dismissButton = {
                 TextButton(onClick = {
                     onDismiss
                     showPicker = false
-                }) { Text("Cancel") }
+                }) { Text(text = "Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant) }
             },
             modeToggleButton = {
                 IconButton(onClick = { inputMode = !inputMode }) {
@@ -61,33 +63,27 @@ fun M3TimePickerDialog(
             },
             title = {
                 Row(
-                    Modifier.fillMaxWidth(),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text("Select time", style = MaterialTheme.typography.titleLarge)
+                    Text(
+                        text = "Select time",
+                        style = MaterialTheme.typography.titleLarge
+                    )
                 }
             }
         ) {
             if (inputMode) {
                 TimeInput(
-                    state = state
+                    state = state,
+                    colors = timePickerDefaultColors()
                 )
             } else {
                 TimePicker(
                     state = state,
-                    colors = TimePickerDefaults.colors(
-                        clockDialColor = MaterialTheme.colorScheme.surfaceVariant,          // #262A2E
-                        clockDialSelectedContentColor = MaterialTheme.colorScheme.onPrimary,// text on selected circle
-                        clockDialUnselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-//                        clockDialSeletedColor = MaterialTheme.colorScheme.primary,         // #D9A5B3 (pink puck)
-                        periodSelectorSelectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
-                        periodSelectorSelectedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-                        periodSelectorUnselectedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
-                        periodSelectorUnselectedContentColor = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-//                    colors = TimePickerDefaults.colors(
-//
-//                    )
+                    colors = timePickerDefaultColors()
                 )
             }
         }

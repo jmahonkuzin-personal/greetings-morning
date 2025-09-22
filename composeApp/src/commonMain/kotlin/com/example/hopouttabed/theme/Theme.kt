@@ -28,6 +28,12 @@ val LighterGunmetal = Color(0xFF3c4047)
 val EvenLighterGunmetal = Color(0xFF4f5359)
 val DarkGray = Color(0xFF2A2A2A) // text fields, modal surfaces, or inactive buttons.
 
+val Surface        = Color(0xFF17191C) // dialog/card
+val SurfaceVariant = Color(0xFF3C4047) // chips, unselected states
+val OnSurface      = Color(0xFFE6E6E6) // primary text
+val OnSurfaceVar   = Color(0xFFC8CCD2) // secondary text on chips
+val Outline        = Color(0xFF4F5359) // subtle borders
+
 
 val DarkColorScheme = darkColorScheme(
     primary = SoftPink,       // Soft pink accent
@@ -36,20 +42,23 @@ val DarkColorScheme = darkColorScheme(
     background = DeepBlack,    // App background
     onBackground = PureWhite,  // Text on background (white)
 
-    surface = MidGray,       // Task card background
-    onSurface = PureBlack,     // Text on card
+    surface = Surface,
+    onSurface = OnSurface,
+
+    surfaceVariant = SurfaceVariant,
+    onSurfaceVariant = OnSurfaceVar,
 
     secondary = Gunmetal,
-    onSecondary = PureWhite,
+    onSecondary = PureWhite.copy(alpha = 0.9f),
 
     secondaryContainer = DarkGray,
     onSecondaryContainer = PureWhite,
 
-    tertiary = Color(0xFF8AD2C5),      // Calming teal for optional accent
+    tertiary = Color(0xFF689f95),      // Calming teal for optional accent
     onTertiary = Color(0xFF000000),    // Text/icon on teal
 
     error = Color(0xFFD75D5D),         // Muted red for errors
     onError = Color(0xFFFFFFFF),       // Text/icon on error bg
 
-    outline = Color(0xFF4D4D4D)        // Border and dividers (subtle gray)
+    outline = Outline        // Border and dividers (subtle gray)
 )
