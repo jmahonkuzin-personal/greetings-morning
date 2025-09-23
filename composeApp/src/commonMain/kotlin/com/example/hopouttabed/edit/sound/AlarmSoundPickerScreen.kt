@@ -1,4 +1,4 @@
-package com.example.hopouttabed.addAlarm.sound
+package com.example.hopouttabed.edit.sound
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

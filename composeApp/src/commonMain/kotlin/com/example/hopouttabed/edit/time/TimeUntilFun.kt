@@ -1,4 +1,4 @@
-package com.example.hopouttabed.addAlarm.time
+package com.example.hopouttabed.edit.time
 
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DatePeriod

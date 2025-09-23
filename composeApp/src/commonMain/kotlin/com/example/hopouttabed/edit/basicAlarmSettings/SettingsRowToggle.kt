@@ -1,4 +1,4 @@
-package com.example.hopouttabed.addAlarm.basicAlarmSettings
+package com.example.hopouttabed.edit.basicAlarmSettings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,14 +17,14 @@ fun SettingsRowToggle(
     label: String,
     switchState: Boolean,
     onToggle: (Boolean) -> Unit,
+    modifier: Modifier
 ) {
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .padding(vertical = 8.dp)
+        modifier = modifier
+            .wrapContentWidth()
+            .height(50.dp)
             .background(
-                color = MaterialTheme.colorScheme.secondary,
+                color = MaterialTheme.colorScheme.surface,
                 shape = MaterialTheme.shapes.medium
             )
             .padding(horizontal = 16.dp, vertical = 12.dp),

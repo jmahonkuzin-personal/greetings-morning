@@ -1,4 +1,4 @@
-package com.example.hopouttabed.addAlarm
+package com.example.hopouttabed.edit
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft

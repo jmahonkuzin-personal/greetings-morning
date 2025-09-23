@@ -1,4 +1,4 @@
-package com.example.hopouttabed.addAlarm
+package com.example.hopouttabed.edit
 
 
 import androidx.compose.foundation.layout.*
@@ -6,16 +6,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.hopouttabed.AlarmTimePickerHost
-import com.example.hopouttabed.addAlarm.basicAlarmSettings.AlarmReminderText
-import com.example.hopouttabed.addAlarm.basicAlarmSettings.BasicAlarmSettings
-import com.example.hopouttabed.addAlarm.basicAlarmSettings.BlockAfterAlarm
-import com.example.hopouttabed.addAlarm.basicAlarmSettings.MissionSettingsSection
-import com.example.hopouttabed.addAlarm.basicAlarmSettings.SelectedSoundSetting
-import com.example.hopouttabed.addAlarm.time.TimeSummaryStatic
-import com.example.hopouttabed.addAlarm.time.timeUntilFun
+import com.example.hopouttabed.edit.time.AlarmTimePickerHost
+import com.example.hopouttabed.edit.basicAlarmSettings.TomorrowGoalsSetting
+import com.example.hopouttabed.edit.basicAlarmSettings.SelectedSoundSetting
+import com.example.hopouttabed.edit.basicAlarmSettings.SettingsRowToggle
+import com.example.hopouttabed.edit.basicAlarmSettings.TheWhyOfTheAlarmSetting
+import com.example.hopouttabed.edit.time.TimeSummaryStatic
+import com.example.hopouttabed.edit.time.timeUntilFun
+import com.example.hopouttabed.dashboard.DashboardTopAppBar
 import com.example.hopouttabed.theme.WakeUpAppTheme
 import com.example.hopouttabed.viewModel.AlarmCallbacks
 import com.example.hopouttabed.viewModel.AlarmSound
@@ -25,7 +24,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddAlarmScreen(
+fun AlarmEditScreen(
     onSave: () -> Unit,
     onBackConfirmed: () -> Unit,
     onNavigateToSoundPicker: () -> Unit,
@@ -38,9 +37,9 @@ fun AddAlarmScreen(
     val until = timeUntilFun(alarmUiState.time)
 
     Scaffold(
-//        topBar = {
-//            AddAlarmTopAppBar(onBack = { showConfirmDialog = true })
-//        },
+        topBar = {
+            DashboardTopAppBar()
+        },
         bottomBar = {
             Row(
                 modifier = Modifier.padding(16.dp),
@@ -94,43 +93,42 @@ fun AddAlarmScreen(
                 time = alarmUiState.time,
                 onEdit = { isEditTime = true }
             )
-//            Text(text = alarmUiState.time.toString())
             AlarmTimePickerHost(
                 show = isEditTime,
                 onClose = { isEditTime = false },
                 onConfirm = alarmCallbacks.updateTime
             )
-//            picker.TimePicker(
-//                initialHour = 7,
-//                initialMinute = 30,
-//                is24Hour = false,
-//                onConfirm = alarmCallbacks.updateTime,
-//                onDismiss = { }
-//            )
-//            AlarmTimePickerHost(
-//                show = true,
-//                onDismiss = {},
-//                onTimeSelected = alarmCallbacks.updateTime
-//            )
-//            WheelTimePickerWrapper(
-//                time = alarmUiState.time,
-//                onTimeChanged = alarmCallbacks.updateTime
-//            )
 
             Spacer(modifier = Modifier.height(24.dp))
-
-            AlarmReminderText()
-            BlockAfterAlarm()
-
-            BasicAlarmSettings(
-                alarmUiState = alarmUiState,
-                callbacks = alarmCallbacks
-            )
 
             SelectedSoundSetting(
                 selectedSound = alarmUiState.sound,
                 onNavigateToSoundPicker = onNavigateToSoundPicker
             )
+            Spacer(modifier = Modifier.height(6.dp))
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(6.dp),
+            ) {
+                SettingsRowToggle(
+                    label = "Vibrate",
+                    switchState = alarmUiState.hasVibrate,
+                    onToggle = alarmCallbacks.toggleVibrate,
+                    modifier = Modifier.weight(1f)
+                )
+                SettingsRowToggle(
+                    label = "Snooze",
+                    switchState = alarmUiState.hasSnooze,
+                    onToggle = alarmCallbacks.toggleSnooze,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Spacer(modifier = Modifier.height(18.dp))
+
+            TheWhyOfTheAlarmSetting()
+
+            Spacer(modifier = Modifier.height(6.dp))
+
+            TomorrowGoalsSetting()
 
 //            MissionSettingsSection()
 //            Text(
@@ -171,7 +169,7 @@ fun AddAlarmScreen(
 
 @Preview
 @Composable
-fun AddAlarmScreenPreview() {
+fun AlarmEditScreenPreview() {
     // Mock state
     val previewUiState = AlarmUiState(
         time = LocalTime(7, 30),
@@ -195,7 +193,7 @@ fun AddAlarmScreenPreview() {
     )
 
     WakeUpAppTheme {
-        AddAlarmScreen(
+        AlarmEditScreen(
             onSave = {},
             onBackConfirmed = {},
             onNavigateToSoundPicker = {},

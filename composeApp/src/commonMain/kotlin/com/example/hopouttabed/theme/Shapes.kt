@@ -12,7 +12,7 @@ internal val WakeUpShapes = Shapes(
     large = RoundedCornerShape(8.dp),
 
     // Most common shape for cards, panels, and components
-    medium = RoundedCornerShape(12.dp),
+    medium = RoundedCornerShape(10.dp),
 
     // Small buttons or input fields
     small = RoundedCornerShape(24.dp),

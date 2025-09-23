@@ -1,5 +1,6 @@
-package com.example.hopouttabed
+package com.example.hopouttabed.edit.time
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 // iosMain
@@ -25,6 +26,6 @@ class IOSAlarmTimePicker : AlarmTimePicker {
     fun IOSPicker() {
         // Compose Multiplatform doesn't have a native iOS time picker yet,
         // so you might create your own wheel-style UI or show a placeholder
-        androidx.compose.material3.Text("iOS Time Picker (implement custom)")
+        Text("iOS Time Picker (implement custom)")
     }
 }

@@ -1,8 +1,6 @@
-package com.example.hopouttabed.addAlarm.basicAlarmSettings
+package com.example.hopouttabed.edit.basicAlarmSettings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
@@ -12,15 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
-import com.example.hopouttabed.viewModel.AlarmSound
 
 @Composable
-fun SelectedSoundSetting(
-    selectedSound: AlarmSound,
-    onNavigateToSoundPicker: () -> Unit
-) {
+fun BlockAfterAlarmExpanded() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -30,30 +23,16 @@ fun SelectedSoundSetting(
                 color = MaterialTheme.colorScheme.secondary,
                 shape = MaterialTheme.shapes.medium
             )
-            .clickable(onClick = onNavigateToSoundPicker) // ✅ click support
-            .pointerInput(Unit) {
-                detectHorizontalDragGestures { _, dragAmount ->
-                    if (dragAmount < -50f) { // ✅ swipe left
-                        onNavigateToSoundPicker()
-                    }
-                }
-            }
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Sound",
+            text = "Block apps after alarm",
             color = MaterialTheme.colorScheme.onSecondary,
             style = MaterialTheme.typography.titleLarge
         )
-        Spacer(modifier = Modifier.weight(1f))
-
-        Text(
-            selectedSound.displayName,
-            color = MaterialTheme.colorScheme.onSecondary,
-            style = MaterialTheme.typography.headlineMedium
-        )
+        Spacer(modifier = Modifier.weight(1f)) // 👈 Push content to the right
         Icon(
             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
             contentDescription = null,

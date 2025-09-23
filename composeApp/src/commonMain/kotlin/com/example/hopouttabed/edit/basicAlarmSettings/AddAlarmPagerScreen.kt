@@ -1,4 +1,4 @@
-package com.example.hopouttabed.addAlarm.basicAlarmSettings
+package com.example.hopouttabed.edit.basicAlarmSettings
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.hopouttabed.AppBackHandler
-import com.example.hopouttabed.addAlarm.AddAlarmScreen
-import com.example.hopouttabed.addAlarm.sound.AlarmSoundPickerScreen
+import com.example.hopouttabed.edit.AlarmEditScreen
+import com.example.hopouttabed.edit.sound.AlarmSoundPickerScreen
 import com.example.hopouttabed.viewModel.AlarmCallbacks
 import com.example.hopouttabed.viewModel.AlarmViewModel
 import kotlinx.coroutines.launch
@@ -43,7 +43,7 @@ fun AddAlarmPagerScreen(
     ) { page ->
         when (page) {
             0 -> {
-                AddAlarmScreen(
+                AlarmEditScreen(
                     onSave = {
                         alarmVM.saveAlarm()
                         navigateHome()
