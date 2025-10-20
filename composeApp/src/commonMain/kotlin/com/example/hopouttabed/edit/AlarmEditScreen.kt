@@ -3,6 +3,7 @@ package com.example.hopouttabed.edit
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -11,7 +12,7 @@ import com.example.hopouttabed.edit.time.AlarmTimePickerHost
 import com.example.hopouttabed.edit.basicAlarmSettings.TomorrowGoalsSetting
 import com.example.hopouttabed.edit.basicAlarmSettings.SelectedSoundSetting
 import com.example.hopouttabed.edit.basicAlarmSettings.SettingsRowToggle
-import com.example.hopouttabed.edit.basicAlarmSettings.TheWhyOfTheAlarmSetting
+import com.example.hopouttabed.edit.basicAlarmSettings.TheWhyOfTheAlarmSettings
 import com.example.hopouttabed.edit.time.TimeSummaryStatic
 import com.example.hopouttabed.edit.time.timeUntilFun
 import com.example.hopouttabed.dashboard.DashboardTopAppBar
@@ -99,36 +100,34 @@ fun AlarmEditScreen(
                 onConfirm = alarmCallbacks.updateTime
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+
+            SettingsDivider()
 
             SelectedSoundSetting(
                 selectedSound = alarmUiState.sound,
                 onNavigateToSoundPicker = onNavigateToSoundPicker
             )
-            Spacer(modifier = Modifier.height(6.dp))
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                SettingsRowToggle(
-                    label = "Vibrate",
-                    switchState = alarmUiState.hasVibrate,
-                    onToggle = alarmCallbacks.toggleVibrate,
-                    modifier = Modifier.weight(1f)
-                )
-                SettingsRowToggle(
-                    label = "Snooze",
-                    switchState = alarmUiState.hasSnooze,
-                    onToggle = alarmCallbacks.toggleSnooze,
-                    modifier = Modifier.weight(1f)
-                )
-            }
-            Spacer(modifier = Modifier.height(18.dp))
+            SettingsDivider()
 
-            TheWhyOfTheAlarmSetting()
+            SettingsRowToggle(
+                label = "Vibrate",
+                switchState = alarmUiState.hasVibrate,
+                onToggle = alarmCallbacks.toggleVibrate
+            )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            SettingsDivider()
 
-            TomorrowGoalsSetting()
+            SettingsRowToggle(
+                label = "Snooze",
+                switchState = alarmUiState.hasSnooze,
+                onToggle = alarmCallbacks.toggleSnooze
+            )
+
+            SettingsDivider()
+
+            TheWhyOfTheAlarmSettings()
+
 
 //            MissionSettingsSection()
 //            Text(
@@ -165,6 +164,17 @@ fun AlarmEditScreen(
             onBackConfirmed = onBackConfirmed
         )
     }
+}
+
+@Composable
+fun SettingsDivider() {
+    Spacer(modifier = Modifier.height(3.dp))
+    HorizontalDivider(
+        modifier = Modifier.fillMaxWidth(),
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.surfaceVariant
+    )
+    Spacer(modifier = Modifier.height(3.dp))
 }
 
 @Preview

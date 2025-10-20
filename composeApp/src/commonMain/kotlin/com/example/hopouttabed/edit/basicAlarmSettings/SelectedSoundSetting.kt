@@ -25,10 +25,10 @@ fun SelectedSoundSetting(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .background(
-                color = MaterialTheme.colorScheme.secondary,
-                shape = MaterialTheme.shapes.medium
-            )
+//            .background(
+//                color = MaterialTheme.colorScheme.secondary,
+//                shape = MaterialTheme.shapes.medium
+//            )
             .clickable(onClick = onNavigateToSoundPicker)
             .pointerInput(Unit) {
                 detectHorizontalDragGestures { _, dragAmount ->

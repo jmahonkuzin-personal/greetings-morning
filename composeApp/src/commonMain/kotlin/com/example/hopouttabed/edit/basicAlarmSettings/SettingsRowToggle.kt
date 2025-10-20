@@ -17,16 +17,16 @@ fun SettingsRowToggle(
     label: String,
     switchState: Boolean,
     onToggle: (Boolean) -> Unit,
-    modifier: Modifier
+    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
             .wrapContentWidth()
             .height(50.dp)
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = MaterialTheme.shapes.medium
-            )
+//            .background(
+//                color = MaterialTheme.colorScheme.surface,
+//                shape = MaterialTheme.shapes.medium
+//            )
             .padding(horizontal = 16.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
