@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 data class AlarmUiModel(
     val time: String,
     val amPm: String,
-    val missionIcons: List<String>,
+    val missionIcons: List<String> = listOf<String>(),
     val enabled: Boolean,
     val activeDays: Set<AlarmDayOfWeek> = setOf(AlarmDayOfWeek.Monday, AlarmDayOfWeek.Tuesday, AlarmDayOfWeek.Wednesday)
 )

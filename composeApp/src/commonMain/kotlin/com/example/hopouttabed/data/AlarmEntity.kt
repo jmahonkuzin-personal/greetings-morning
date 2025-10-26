@@ -8,6 +8,7 @@ data class AlarmEntity(
     @PrimaryKey val uuid: String,
     val hour: Int,
     val minute: Int,
+    val enabled: Boolean,
     val disabledMinutes: Int,
     val allowedAppsDuringDisable: List<String>,
     val hasVibrate: Boolean,

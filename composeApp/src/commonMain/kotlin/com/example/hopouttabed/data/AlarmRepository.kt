@@ -1,14 +1,19 @@
 package com.example.hopouttabed.data
 
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 class AlarmRepository(
     private val dao: AlarmDao,
     private val dispatcher: CoroutineDispatcher
 ) {
-    suspend fun getAll(): List<Alarm> = withContext(dispatcher) {
-        dao.getAll().map { it.toDomain() }
+    fun getAll(): Flow<List<Alarm>> = flow {
+        // Fetches data in a background thread
+        withContext(dispatcher) {
+            emit(dao.getAll().map { it.toDomain() })
+        }
     }
 
     suspend fun insert(alarm: Alarm) = withContext(dispatcher) {
