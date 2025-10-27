@@ -10,7 +10,7 @@ data class AlarmEntity(
     val minute: Int,
     val enabled: Boolean,
     val disabledMinutes: Int,
-    val allowedAppsDuringDisable: List<String>,
+    val activeDays: List<String>,
     val hasVibrate: Boolean,
     val hasSnooze: Boolean,
     val sound: String,

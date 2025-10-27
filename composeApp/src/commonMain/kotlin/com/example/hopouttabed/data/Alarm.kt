@@ -1,5 +1,6 @@
 package com.example.hopouttabed.data
 
+import com.example.hopouttabed.dashboard.viewModel.AlarmDayOfWeek
 import com.example.hopouttabed.randomUUID
 
 data class Alarm(
@@ -8,7 +9,7 @@ data class Alarm(
     val minute: Int,
     val enabled: Boolean,
     val disabledMinutes: Int,
-    val allowedAppsDuringDisable: List<String>,
+    val activeDays: Set<AlarmDayOfWeek> = setOf(AlarmDayOfWeek.Monday, AlarmDayOfWeek.Tuesday, AlarmDayOfWeek.Wednesday),
     val hasVibrate: Boolean,
     val hasSnooze: Boolean,
     val sound: String,
@@ -21,7 +22,7 @@ fun AlarmEntity.toDomain(): Alarm = Alarm(
     minute,
     enabled,
     disabledMinutes,
-    allowedAppsDuringDisable,
+    activeDays = activeDays.mapTo(mutableSetOf()) { AlarmDayOfWeek.valueOf(it) },
     hasVibrate,
     hasSnooze,
     sound,
@@ -34,7 +35,7 @@ fun Alarm.toEntity(): AlarmEntity = AlarmEntity(
     minute,
     enabled,
     disabledMinutes,
-    allowedAppsDuringDisable,
+    activeDays = activeDays.map { it.name }.toList(),
     hasVibrate,
     hasSnooze,
     sound,

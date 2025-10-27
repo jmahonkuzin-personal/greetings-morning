@@ -16,6 +16,10 @@ class AlarmRepository(
         }
     }
 
+    suspend fun updateAlarmEnabledState(uuid: String, isEnabled: Boolean) {
+        dao.updateEnabledState(uuid, isEnabled)
+    }
+
     suspend fun insert(alarm: Alarm) = withContext(dispatcher) {
         dao.insert(alarm.toEntity())
     }

@@ -2,6 +2,7 @@ package com.example.hopouttabed.dashboard.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hopouttabed.data.Alarm
 import com.example.hopouttabed.data.AlarmRepository
 import com.example.hopouttabed.data.DI
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,44 +16,34 @@ class DashboardViewModel(
 ) : ViewModel() {
 
 
-    private val _alarms = MutableStateFlow<List<AlarmUiModel>>(emptyList())
+    private val _alarms = MutableStateFlow<List<Alarm>>(emptyList())
 
     init {
         viewModelScope.launch {
             repository.getAll().collect { alarms ->
-                _alarms.value = alarms.map { alarm ->
-                    val time = "${alarm.hour}:${alarm.minute.toString().padStart(2, '0')}" // Format time
-                    val amPm = if (alarm.hour < 12) "AM" else "PM"
-                    val enabled = alarm.enabled
-                    AlarmUiModel(
-                        time = time,
-                        amPm = amPm,
-                        enabled = enabled
-                    )
-                }
+                _alarms.value = alarms
             }
         }
     }
 
 
-    val alarms: StateFlow<List<AlarmUiModel>> = _alarms.asStateFlow()
+    val alarms: StateFlow<List<Alarm>> = _alarms.asStateFlow()
 
-    fun toggleAlarm(index: Int, enabled: Boolean) {
+    fun toggleAlarm(alarm: Alarm, isEnabled: Boolean) {
         viewModelScope.launch {
-            val alarm = _alarms.value[index]
-            repository.updateAlarm(index, alarm.copy(enabled = enabled))
+            repository.updateAlarmEnabledState(alarm.uuid, isEnabled)
         }
     }
 
-    fun addAlarm(alarm: AlarmUiModel) {
+    fun addAlarm(alarm: Alarm) {
         viewModelScope.launch {
             repository.insert(alarm)
         }
     }
 
-    fun removeAlarm(index: Int) {
+    fun removeAlarm(alarm: Alarm) {
         viewModelScope.launch {
-            repository.delete(index)
+            repository.delete(alarm)
         }
     }
 }

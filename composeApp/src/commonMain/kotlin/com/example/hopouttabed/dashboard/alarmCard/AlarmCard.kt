@@ -11,11 +11,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hopouttabed.dashboard.viewModel.AlarmDayOfWeek
 import com.example.hopouttabed.dashboard.viewModel.AlarmUiModel
+import com.example.hopouttabed.data.Alarm
 import kotlinx.datetime.DayOfWeek
 
 @Composable
 fun AlarmCard(
-    alarm: AlarmUiModel,
+    alarm: Alarm,
     onToggleEnabled: (Boolean) -> Unit
 ) {
 
@@ -52,7 +53,7 @@ fun AlarmCard(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Text(
-                    text = "${alarm.time} ${alarm.amPm}",
+                    text = "${alarm.hour} : ${alarm.minute} AM", // TODO fix
                     style = MaterialTheme.typography.headlineLarge.copy(
                         fontWeight = FontWeight.ExtraBold,
                         letterSpacing = 1.5.sp
