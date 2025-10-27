@@ -184,22 +184,22 @@ fun AlarmEditScreenPreview() {
     val previewUiState = AlarmUiState(
         time = LocalTime(7, 30),
         disabledMinutes = 15,
-        allowedAppsDuringDisable = listOf("Messages", "Spotify"),
+        activeDays = listOf("Monday", "Tuesday"),
         hasVibrate = true,
         hasSnooze = false,
         sound = AlarmSound.Beacon,
-        requireJournal = true
+        isEnabled = true
     )
 
     // Preview AlarmCallbacks (all no-ops)
     val previewCallbacks = AlarmCallbacks(
         updateTime = { _, _ -> },
         updateDisabledMinutes = { _ -> },
-        updateAllowedAppsDuringDisable = { _ -> },
+        updateActiveDays = { _ -> },
         toggleVibrate = { _ -> },
         toggleSnooze = { _ -> },
         updateSound = { _ -> },
-        toggleRequireJournal = { _ -> }
+        toggleIsEnabled = { _ -> }
     )
 
     WakeUpAppTheme {

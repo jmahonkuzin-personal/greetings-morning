@@ -34,7 +34,8 @@ fun AddAlarmPagerScreen(
         updateActiveDays = alarmVM::updateActiveDays,
         toggleVibrate = alarmVM::toggleVibrate,
         toggleSnooze = alarmVM::toggleSnooze,
-        updateSound = alarmVM::updateSound
+        updateSound = alarmVM::updateSound,
+        toggleIsEnabled = alarmVM::toggleIsEnabled
     )
 
     HorizontalPager(

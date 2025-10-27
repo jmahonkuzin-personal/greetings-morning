@@ -29,7 +29,8 @@ data class AlarmCallbacks(
     val updateActiveDays: (List<String>) -> Unit = {},
     val toggleVibrate: (Boolean) -> Unit = {},
     val toggleSnooze: (Boolean) -> Unit = {},
-    val updateSound: (AlarmSound) -> Unit = {}
+    val updateSound: (AlarmSound) -> Unit = {},
+    val toggleIsEnabled: (Boolean) -> Unit = {}
 )
 
 class AlarmViewModel(
@@ -107,6 +108,14 @@ class AlarmViewModel(
         _uiState.update { current ->
             current.copy(
                 hasSnooze = !current.hasSnooze
+            )
+        }
+    }
+
+    fun toggleIsEnabled(@Suppress("UNUSED_PARAMETER") value: Boolean) {
+        _uiState.update { current ->
+            current.copy(
+                isEnabled = !current.isEnabled
             )
         }
     }
