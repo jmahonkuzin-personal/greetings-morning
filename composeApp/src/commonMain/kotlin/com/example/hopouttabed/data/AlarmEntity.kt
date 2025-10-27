@@ -13,6 +13,5 @@ data class AlarmEntity(
     val activeDays: List<String>,
     val hasVibrate: Boolean,
     val hasSnooze: Boolean,
-    val sound: String,
-    val requireJournal: Boolean
+    val sound: String
 )

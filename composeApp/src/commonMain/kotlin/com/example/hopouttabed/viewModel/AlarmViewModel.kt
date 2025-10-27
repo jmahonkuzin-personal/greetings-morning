@@ -2,6 +2,7 @@ package com.example.hopouttabed.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hopouttabed.dashboard.viewModel.AlarmDayOfWeek
 import com.example.hopouttabed.data.Alarm
 import com.example.hopouttabed.data.AlarmRepository
 import com.example.hopouttabed.data.DI
@@ -15,21 +16,20 @@ import kotlinx.datetime.LocalTime
 data class AlarmUiState(
     val time: LocalTime = LocalTime(7, 30, 0, 0),
     val disabledMinutes: Int = 0,
-    val allowedAppsDuringDisable: List<String> = mutableListOf(),
+    val activeDays: List<String> = mutableListOf(),
     val hasVibrate: Boolean = true,
     val hasSnooze: Boolean = true,
     val sound: AlarmSound = AlarmSound.Beacon,
-    val requireJournal: Boolean = true
+    val isEnabled: Boolean = false
 )
 
 data class AlarmCallbacks(
     val updateTime: (hour: Int, minute: Int) -> Unit = { _, _ -> },
     val updateDisabledMinutes: (Int) -> Unit = {},
-    val updateAllowedAppsDuringDisable: (List<String>) -> Unit = {},
+    val updateActiveDays: (List<String>) -> Unit = {},
     val toggleVibrate: (Boolean) -> Unit = {},
     val toggleSnooze: (Boolean) -> Unit = {},
-    val updateSound: (AlarmSound) -> Unit = {},
-    val toggleRequireJournal: (Boolean) -> Unit = {}
+    val updateSound: (AlarmSound) -> Unit = {}
 )
 
 class AlarmViewModel(
@@ -47,11 +47,11 @@ class AlarmViewModel(
                 hour = uiState.time.hour,
                 minute = uiState.time.minute,
                 disabledMinutes = uiState.disabledMinutes,
-                allowedAppsDuringDisable = uiState.allowedAppsDuringDisable,
+                activeDays = uiState.activeDays.mapTo(mutableSetOf()) { AlarmDayOfWeek.valueOf(it) },
                 hasVibrate = uiState.hasVibrate,
                 hasSnooze = uiState.hasSnooze,
                 sound = uiState.sound.toString(),
-                requireJournal = uiState.requireJournal
+                enabled = uiState.isEnabled
             )
             repository.insert(alarm) // or alarm.toEntity() if your DB uses AlarmEntity
         }
@@ -79,10 +79,10 @@ class AlarmViewModel(
         }
     }
 
-    fun updateAllowedAppsDuringDisable(newAllowedApps: List<String>) {
+    fun updateActiveDays(newActiveDays: List<String>) {
         _uiState.update { current ->
             current.copy(
-                allowedAppsDuringDisable = newAllowedApps
+                activeDays = newActiveDays
             )
         }
     }

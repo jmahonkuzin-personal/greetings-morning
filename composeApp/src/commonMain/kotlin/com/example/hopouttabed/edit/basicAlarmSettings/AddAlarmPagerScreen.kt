@@ -31,7 +31,7 @@ fun AddAlarmPagerScreen(
     val alarmCallbacks: AlarmCallbacks = AlarmCallbacks(
         updateTime = alarmVM::updateTime,
         updateDisabledMinutes = alarmVM::updateDisabledMinutes,
-        updateAllowedAppsDuringDisable = alarmVM::updateAllowedAppsDuringDisable,
+        updateActiveDays = alarmVM::updateActiveDays,
         toggleVibrate = alarmVM::toggleVibrate,
         toggleSnooze = alarmVM::toggleSnooze,
         updateSound = alarmVM::updateSound

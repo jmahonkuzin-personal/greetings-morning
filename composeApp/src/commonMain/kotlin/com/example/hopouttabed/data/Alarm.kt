@@ -12,8 +12,7 @@ data class Alarm(
     val activeDays: Set<AlarmDayOfWeek> = setOf(AlarmDayOfWeek.Monday, AlarmDayOfWeek.Tuesday, AlarmDayOfWeek.Wednesday),
     val hasVibrate: Boolean,
     val hasSnooze: Boolean,
-    val sound: String,
-    val requireJournal: Boolean
+    val sound: String
 )
 
 fun AlarmEntity.toDomain(): Alarm = Alarm(
@@ -25,8 +24,7 @@ fun AlarmEntity.toDomain(): Alarm = Alarm(
     activeDays = activeDays.mapTo(mutableSetOf()) { AlarmDayOfWeek.valueOf(it) },
     hasVibrate,
     hasSnooze,
-    sound,
-    requireJournal
+    sound
 )
 
 fun Alarm.toEntity(): AlarmEntity = AlarmEntity(
@@ -38,6 +36,5 @@ fun Alarm.toEntity(): AlarmEntity = AlarmEntity(
     activeDays = activeDays.map { it.name }.toList(),
     hasVibrate,
     hasSnooze,
-    sound,
-    requireJournal
+    sound
 )
