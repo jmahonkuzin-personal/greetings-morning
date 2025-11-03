@@ -2,8 +2,7 @@ package com.example.hopouttabed.data
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class AlarmRepository(
@@ -11,12 +10,12 @@ class AlarmRepository(
     private val dispatcher: CoroutineDispatcher
 ) {
 
-    fun getAll(): Flow<List<Alarm>> = flow {
-        emit(dao.getAll().map { it.toDomain() })
-    }.flowOn(dispatcher)
+    fun getAll(): Flow<List<Alarm>> {
+        return dao.getAll().map { list -> list.map { it.toDomain() } }
+    }
 
-    suspend fun updateAlarmEnabledState(uuid: String, isEnabled: Boolean) {
-        dao.updateEnabledState(uuid, isEnabled)
+    suspend fun updateAlarmEnabledState(uuid: String, isEnabled: Boolean): Int {
+        return dao.updateEnabledState(uuid, isEnabled)
     }
 
     suspend fun insert(alarm: Alarm) = withContext(dispatcher) {

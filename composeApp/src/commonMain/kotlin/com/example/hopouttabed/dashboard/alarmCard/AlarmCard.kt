@@ -15,7 +15,7 @@ import com.example.hopouttabed.data.Alarm
 @Composable
 fun AlarmCard(
     alarm: Alarm,
-    onToggleEnabled: (Boolean) -> Unit
+    onToggle: (Boolean) -> Unit
 ) {
 
     val backgroundColor = if (alarm.enabled) {
@@ -82,7 +82,7 @@ fun AlarmCard(
             }
             Switch(
                 checked = alarm.enabled,
-                onCheckedChange = { onToggleEnabled(it) },
+                onCheckedChange = onToggle,
                 colors = SwitchDefaults.colors(
                     checkedThumbColor = Color.White,
                     checkedTrackColor = MaterialTheme.colorScheme.primary,

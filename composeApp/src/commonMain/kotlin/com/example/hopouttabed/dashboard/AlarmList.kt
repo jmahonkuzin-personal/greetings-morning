@@ -42,7 +42,7 @@ fun AlarmList(alarms: List<Alarm>, onToggle: (alarm: Alarm, isEnabled: Boolean) 
         }
 
         alarms.forEachIndexed { index, alarm ->
-            AlarmCard(alarm, onToggleEnabled = { isEnabled -> onToggle(alarm, isEnabled) })
+            AlarmCard(alarm, onToggle = { isEnabled -> onToggle(alarm, isEnabled) })
         }
     }
 }
