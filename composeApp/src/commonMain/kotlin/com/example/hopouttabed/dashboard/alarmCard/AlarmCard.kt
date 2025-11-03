@@ -10,9 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hopouttabed.dashboard.viewModel.AlarmDayOfWeek
-import com.example.hopouttabed.dashboard.viewModel.AlarmUiModel
 import com.example.hopouttabed.data.Alarm
-import kotlinx.datetime.DayOfWeek
 
 @Composable
 fun AlarmCard(

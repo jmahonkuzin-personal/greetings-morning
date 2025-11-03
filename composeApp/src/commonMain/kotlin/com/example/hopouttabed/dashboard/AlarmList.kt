@@ -11,11 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.hopouttabed.dashboard.alarmCard.AlarmCard
-import com.example.hopouttabed.dashboard.viewModel.AlarmUiModel
 import com.example.hopouttabed.data.Alarm
 
 @Composable
-fun AlarmList(alarms: List<Alarm>, onToggle: (index: Int, isEnabled: Boolean) -> Unit) {
+fun AlarmList(alarms: List<Alarm>, onToggle: (alarm: Alarm, isEnabled: Boolean) -> Unit) {
     Column(
         verticalArrangement = Arrangement.spacedBy(18.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,7 +42,7 @@ fun AlarmList(alarms: List<Alarm>, onToggle: (index: Int, isEnabled: Boolean) ->
         }
 
         alarms.forEachIndexed { index, alarm ->
-            AlarmCard(alarm, onToggleEnabled = { isEnabled -> onToggle(index, isEnabled) })
+            AlarmCard(alarm, onToggleEnabled = { isEnabled -> onToggle(alarm, isEnabled) })
         }
     }
 }

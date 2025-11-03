@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 
 // shared/src/commonMain/kotlin/Database.kt
 
-@Database(entities = [AlarmEntity::class], version = 1)
+@Database(entities = [AlarmEntity::class], version = 2)
 @TypeConverters(Converters::class)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class AppDatabase : RoomDatabase() {

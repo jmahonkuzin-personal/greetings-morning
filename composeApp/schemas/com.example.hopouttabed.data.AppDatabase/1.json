@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3d7c98804fc4653d0505fd9af17463d0",
+    "identityHash": "67af08013dabc11d18cf5415fd574730",
     "entities": [
       {
         "tableName": "alarm",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `hour` INTEGER NOT NULL, `minute` INTEGER NOT NULL, `disabledMinutes` INTEGER NOT NULL, `allowedAppsDuringDisable` TEXT NOT NULL, `hasVibrate` INTEGER NOT NULL, `hasSnooze` INTEGER NOT NULL, `sound` TEXT NOT NULL, `requireJournal` INTEGER NOT NULL, PRIMARY KEY(`uuid`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uuid` TEXT NOT NULL, `hour` INTEGER NOT NULL, `minute` INTEGER NOT NULL, `enabled` INTEGER NOT NULL, `disabledMinutes` INTEGER NOT NULL, `activeDays` TEXT NOT NULL, `hasVibrate` INTEGER NOT NULL, `hasSnooze` INTEGER NOT NULL, `sound` TEXT NOT NULL, PRIMARY KEY(`uuid`))",
         "fields": [
           {
             "fieldPath": "uuid",
@@ -27,14 +27,20 @@
             "notNull": true
           },
           {
+            "fieldPath": "enabled",
+            "columnName": "enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "disabledMinutes",
             "columnName": "disabledMinutes",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "allowedAppsDuringDisable",
-            "columnName": "allowedAppsDuringDisable",
+            "fieldPath": "activeDays",
+            "columnName": "activeDays",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -55,12 +61,6 @@
             "columnName": "sound",
             "affinity": "TEXT",
             "notNull": true
-          },
-          {
-            "fieldPath": "requireJournal",
-            "columnName": "requireJournal",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -73,7 +73,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3d7c98804fc4653d0505fd9af17463d0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '67af08013dabc11d18cf5415fd574730')"
     ]
   }
 }
